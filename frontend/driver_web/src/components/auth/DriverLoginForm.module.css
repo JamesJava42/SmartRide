@@ -1,0 +1,53 @@
+.formShell {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.titleBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.subtitle {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.forgotRow {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.forgotLink {
+  border: none;
+  background: none;
+  color: var(--green-700);
+  font-size: 12px;
+}
+
+.errorCta {
+  background: #dc2626;
+}
+
+.errorCta:hover {
+  background: #b91c1c;
+}
+
+.inlineIcon {
+  display: inline;
+  vertical-align: text-bottom;
+}

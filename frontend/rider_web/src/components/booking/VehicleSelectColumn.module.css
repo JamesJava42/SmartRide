@@ -1,0 +1,160 @@
+.column {
+  width: 100%;
+  height: 100%;
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.header {
+  padding: 14px 14px 10px;
+  flex-shrink: 0;
+  border-bottom: 0.5px solid #E2E5DE;
+}
+
+.routeReady {
+  font-size: 10px;
+  font-weight: 700;
+  color: #1A6B45;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 2px;
+}
+
+.routeMeta {
+  font-size: 11px;
+  color: #5A6B56;
+  margin-bottom: 8px;
+}
+
+.chooseBadge {
+  font-size: 10px;
+  font-weight: 600;
+  color: #1A6B45;
+  border: 1px solid #1A6B45;
+  border-radius: 4px;
+  padding: 3px 7px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  display: inline-block;
+}
+
+.list {
+  flex: 1;
+  overflow-y: scroll;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-height: 0;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.list::-webkit-scrollbar {
+  display: none;
+}
+
+.card {
+  border: 0.5px solid #E2E5DE;
+  border-radius: 11px;
+  padding: 10px 12px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: border-color 0.15s, background 0.15s, opacity 0.15s;
+  background: #FFFFFF;
+}
+
+.card:hover {
+  border-color: #1A6B45;
+  background: #FAFAF8;
+}
+
+.selected {
+  border: 1.5px solid #1A6B45;
+  background: #EDF9F2;
+}
+
+.unavailable {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 5px;
+}
+
+.icon {
+  width: 44px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.amount {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: right;
+}
+
+.eta {
+  font-size: 10px;
+  color: #5A6B56;
+  text-align: right;
+}
+
+.name {
+  font-size: 12px;
+  font-weight: 600;
+  color: #141A13;
+  margin-bottom: 1px;
+}
+
+.cap {
+  font-size: 10px;
+  color: #5A6B56;
+}
+
+.examples {
+  font-size: 10px;
+  color: #8A9B85;
+  font-style: italic;
+}
+
+.footer {
+  padding: 10px;
+  border-top: 0.5px solid #E2E5DE;
+  flex-shrink: 0;
+  background: #FFFFFF;
+}
+
+.bookBtn {
+  width: 100%;
+  padding: 10px;
+  background: #1A6B45;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 9px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: var(--font);
+  transition: background 0.15s;
+}
+
+.bookBtn:hover {
+  background: #155c3a;
+}
+
+.bookBtn:disabled {
+  background: #A8E6C5;
+  cursor: not-allowed;
+}

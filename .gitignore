@@ -1,0 +1,81 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+Desktop.ini
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pyre/
+.hypothesis/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+backend/.venv/
+services/*/.venv/
+gateway/.venv/
+
+# Build / packaging
+build/
+dist/
+site/
+.eggs/
+*.egg-info/
+pip-wheel-metadata/
+
+# Logs / runtime files
+*.log
+*.pid
+*.seed
+*.stackdump
+
+# Environment / secrets
+.env.local
+.env.*.local
+
+# Node / frontend
+node_modules/
+frontend/node_modules/
+frontend/*/node_modules/
+frontend/dist/
+frontend/*/dist/
+frontend/*/.vite/
+frontend/.vite/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Test / browser artifacts
+playwright-report/
+test-results/
+coverage/
+
+# Docker / local data
+postgres_data/
+redis_data/
+operations_media/
+
+# Local generated media
+media/
+services/operations_service/media/
+
+# Legacy monolith leftovers
+backend/.pytest_cache/
+

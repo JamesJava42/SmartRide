@@ -1,0 +1,40 @@
+from enum import Enum
+
+
+class AdminRole(str, Enum):
+    SUPER_ADMIN = "SUPER_ADMIN"
+    OPS_ADMIN = "OPS_ADMIN"
+    ONBOARDING_ADMIN = "ONBOARDING_ADMIN"
+    REGIONAL_ADMIN = "REGIONAL_ADMIN"
+
+
+class OnboardingStatus(str, Enum):
+    DRAFT = "DRAFT"
+    SUBMITTED = "SUBMITTED"
+    UNDER_REVIEW = "UNDER_REVIEW"
+    DOCS_PENDING = "DOCS_PENDING"
+    APPROVED = "APPROVED"
+    REJECTED = "REJECTED"
+
+
+class DocumentType(str, Enum):
+    GOVT_ID_FRONT = "GOVT_ID_FRONT"
+    GOVT_ID_BACK = "GOVT_ID_BACK"
+    DRIVER_LICENSE = "DRIVER_LICENSE"
+    VEHICLE_REGISTRATION = "VEHICLE_REGISTRATION"
+    INSURANCE = "INSURANCE"
+    PROFILE_PHOTO = "PROFILE_PHOTO"
+
+
+class VerificationStatus(str, Enum):
+    SUBMITTED = "SUBMITTED"
+    UNDER_REVIEW = "UNDER_REVIEW"
+    APPROVED = "APPROVED"
+    REJECTED = "REJECTED"
+
+
+class AlertSeverity(str, Enum):
+    LOW = "LOW"
+    MEDIUM = "MEDIUM"
+    HIGH = "HIGH"
+    CRITICAL = "CRITICAL"

@@ -1,0 +1,56 @@
+.card {
+  border: 0.5px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: #ffffff;
+}
+
+.online {
+  border-color: var(--green-700);
+  background: #f0fdf4;
+}
+
+.title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.subtitle {
+  margin-top: 3px;
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.toggle {
+  width: 44px;
+  height: 24px;
+  border-radius: 12px;
+  border: none;
+  background: var(--border);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.toggleOn {
+  background: var(--green-700);
+}
+
+.knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: #ffffff;
+  transition: left 0.2s ease;
+}
+
+.toggleOn .knob {
+  left: 23px;
+}

@@ -1,0 +1,14 @@
+.wrap {
+  position: relative;
+  width: 100%;
+  min-height: 280px;
+  background: #E8EBE4;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .wrap {
+    min-height: 340px;
+  }
+}

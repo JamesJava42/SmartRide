@@ -1,0 +1,144 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #FFFFFF;
+}
+
+.header {
+  padding: 14px 14px 10px;
+  flex-shrink: 0;
+}
+
+.routeReady {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--green-700);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 2px;
+}
+
+.routeMeta {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+
+.badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--green-700);
+  border: 1.5px solid var(--green-700);
+  border-radius: 5px;
+  padding: 3px 10px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.list {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 12px 8px;
+  scrollbar-width: none;
+}
+
+.list::-webkit-scrollbar {
+  display: none;
+}
+
+.card {
+  border: 0.5px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #FFFFFF;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  text-align: left;
+}
+
+.card:hover {
+  border-color: var(--green-700);
+}
+
+.selected {
+  border: 1.5px solid var(--green-700);
+  background: var(--green-50);
+}
+
+.iconWrap {
+  width: 46px;
+  flex-shrink: 0;
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+}
+
+.name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.capacity,
+.examples {
+  font-size: 11px;
+}
+
+.capacity {
+  color: var(--text-secondary);
+}
+
+.examples {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.priceBlock {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.price {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.eta {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.footer {
+  padding: 12px;
+  flex-shrink: 0;
+}
+
+.bookButton {
+  width: 100%;
+  border: none;
+  border-radius: var(--radius-md);
+  background: var(--green-700);
+  color: #FFFFFF;
+  padding: 14px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.mobile .header {
+  padding: 14px 12px 10px;
+}
+
+.bookButtonMobile {
+  font-size: 13px;
+  padding: 12px;
+}

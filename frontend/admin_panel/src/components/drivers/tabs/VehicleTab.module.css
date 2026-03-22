@@ -1,0 +1,86 @@
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+@media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+
+.vehicleHero { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+.vehiclePhoto { width: 72px; height: 72px; background: var(--bg); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 32px; border: 1px solid var(--border); flex-shrink: 0; }
+.vehicleName { font-size: 17px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; }
+.vehicleBadges { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.plateBadge { font-family: monospace; font-size: 13px; font-weight: 700; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 3px 10px; color: var(--text-primary); }
+.typeBadge { font-size: 11px; font-weight: 700; background: var(--green-50); color: var(--green-700); border-radius: 999px; padding: 2px 10px; }
+.activeDot { width: 8px; height: 8px; border-radius: 50%; }
+.dotGreen { background: #10B981; }
+.dotRed { background: #EF4444; }
+.activeLabel { font-size: 12px; color: var(--text-secondary); }
+
+.fields { display: flex; flex-direction: column; }
+.field { display: flex; padding: 10px 0; border-bottom: 1px solid var(--border); gap: 16px; }
+.field:last-child { border-bottom: none; }
+.fieldLabel { font-size: 12px; color: var(--text-muted); min-width: 120px; }
+.fieldVal { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+
+/* Empty state */
+.empty { display: flex; flex-direction: column; align-items: center; padding: 40px 20px; gap: 12px; color: var(--text-muted); font-size: 13px; }
+.empty span { font-size: 28px; }
+.addBtn {
+  padding: 8px 20px;
+  background: var(--green-700);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font);
+}
+.addBtn:hover { background: #155c3b; }
+
+/* Form */
+.formGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 600px) { .formGrid { grid-template-columns: 1fr; } }
+
+.formField { display: flex; flex-direction: column; gap: 4px; }
+.formLabel { font-size: 12px; font-weight: 600; color: var(--text-muted); }
+.formInput {
+  padding: 8px 10px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font);
+  font-size: 14px;
+  color: var(--text-primary);
+  background: var(--white);
+  outline: none;
+  transition: border-color 0.15s;
+  width: 100%;
+  box-sizing: border-box;
+}
+.formInput:focus { border-color: var(--green-700); box-shadow: 0 0 0 3px rgba(26,107,69,.08); }
+
+.formActions { display: flex; align-items: center; justify-content: flex-end; gap: 10px; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); }
+
+.editBtn { font-size: 12px; font-weight: 600; color: var(--green-700); background: none; border: none; cursor: pointer; font-family: var(--font); }
+.editBtn:hover { text-decoration: underline; }
+
+.editActions { display: flex; gap: 8px; align-items: center; }
+
+.cancelBtn { font-size: 12px; color: var(--text-muted); background: none; border: none; cursor: pointer; font-family: var(--font); padding: 4px 8px; }
+.cancelBtn:hover { color: var(--text-primary); }
+.cancelBtn:disabled { opacity: 0.5; }
+
+.saveBtn {
+  padding: 6px 16px;
+  background: var(--green-700);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font);
+}
+.saveBtn:hover:not(:disabled) { background: #155c3b; }
+.saveBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.complianceNote { font-size: 13px; color: var(--text-muted); }
+
+.sk { height: 300px; border-radius: var(--radius-lg); background: linear-gradient(90deg, #F0F2EE 25%, #E8EBE4 50%, #F0F2EE 75%); background-size: 200% 100%; animation: shimmer 1.4s ease-in-out infinite; }
+@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }

@@ -1,0 +1,318 @@
+.root {
+  display: grid;
+  grid-template-rows: var(--navbar-height) 1fr;
+  grid-template-columns: var(--sidebar-width) 1fr;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  gap: 0;
+  z-index: 100;
+  justify-content: space-between;
+}
+
+.navLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--green-700);
+  white-space: nowrap;
+}
+
+.mobileMenuButton {
+  display: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--white);
+  color: var(--text-primary);
+  font-size: 18px;
+  align-items: center;
+  justify-content: center;
+}
+
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.iconBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-size: 16px;
+  transition: background 0.15s;
+}
+.iconBtn:hover { background: var(--bg); color: var(--text-primary); }
+
+/* Profile button */
+.profileWrap { position: relative; }
+
+.profileBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 10px 4px 4px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--white);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+.profileBtn:hover { border-color: var(--green-700); background: var(--green-50); }
+
+.avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--green-700);
+  color: var(--white);
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.profileName {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chevron {
+  font-size: 9px;
+  color: var(--text-muted);
+}
+
+/* Dropdown */
+.dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 200px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  z-index: 200;
+  overflow: hidden;
+}
+
+.dropdownHeader {
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dropdownName {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.dropdownEmail {
+  font-size: 12px;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dropdownRole {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--green-700);
+  background: var(--green-50);
+  border-radius: 999px;
+  padding: 1px 8px;
+  width: fit-content;
+  margin-top: 4px;
+}
+
+.dropdownDivider {
+  height: 1px;
+  background: var(--border);
+}
+
+.dropdownItem {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+  text-align: left;
+}
+.dropdownItem:hover { background: #FEE2E2; color: #991B1B; }
+
+.sidebarDesktop {
+  grid-column: 1;
+  grid-row: 2;
+  background: var(--bg);
+  border-right: 1px solid var(--border);
+  padding: 16px 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mobileBackdrop {
+  display: none;
+}
+
+.mobileSidebar {
+  display: none;
+}
+
+.sidebarItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  border-left: 3px solid transparent;
+  transition: all 0.15s;
+  cursor: pointer;
+}
+.sidebarItem:hover { background: rgba(26,107,69,.06); color: var(--text-primary); }
+.sidebarItemActive {
+  background: var(--white);
+  border-left-color: var(--green-700);
+  color: var(--green-700);
+}
+
+.sidebarIcon { font-size: 15px; flex-shrink: 0; }
+
+.main {
+  grid-column: 2;
+  grid-row: 2;
+  overflow-y: auto;
+  padding: 24px;
+  background: var(--bg);
+}
+
+@media (max-width: 1023px) {
+  .root {
+    grid-template-columns: 1fr;
+  }
+
+  .mobileMenuButton {
+    display: inline-flex;
+  }
+
+  .profileName,
+  .chevron {
+    display: none;
+  }
+
+  .sidebarDesktop {
+    display: none;
+  }
+
+  .main {
+    grid-column: 1;
+    padding: 16px;
+  }
+
+  .mobileBackdrop {
+    position: fixed;
+    inset: var(--navbar-height) 0 0 0;
+    background: rgba(15, 23, 18, 0.32);
+    border: none;
+    z-index: 180;
+  }
+
+  .mobileBackdropVisible {
+    display: block;
+  }
+
+  .mobileSidebar {
+    position: fixed;
+    inset: var(--navbar-height) auto 0 0;
+    width: min(82vw, 292px);
+    background: var(--bg);
+    border-right: 1px solid var(--border);
+    box-shadow: var(--shadow-md);
+    z-index: 190;
+    transform: translateX(-100%);
+    transition: transform 0.2s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mobileSidebarOpen {
+    transform: translateX(0);
+  }
+
+  .mobileSidebarHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 16px 14px;
+    border-bottom: 1px solid var(--border);
+    background: var(--white);
+  }
+
+  .mobileSidebarSubhead {
+    margin-top: 4px;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .mobileCloseButton {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--white);
+    color: var(--text-primary);
+    font-size: 20px;
+    line-height: 1;
+  }
+
+  .mobileSidebarNav {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 12px 0;
+    overflow-y: auto;
+  }
+}

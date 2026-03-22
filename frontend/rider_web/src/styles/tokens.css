@@ -1,0 +1,13 @@
+:root {
+  --green-700: #1A6B45;
+  --green-50: #EDF9F2;
+  --bg: #F4F5F2;
+  --card: #FFFFFF;
+  --border: #E2E5DE;
+  --text-primary: #141A13;
+  --text-secondary: #5A6B56;
+  --text-muted: #8A9B85;
+  --radius-lg: 14px;
+  --radius-md: 10px;
+  --font: "Plus Jakarta Sans", system-ui, sans-serif;
+}

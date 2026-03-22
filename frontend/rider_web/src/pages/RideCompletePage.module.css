@@ -1,0 +1,306 @@
+.page {
+  min-height: 100vh;
+  background: #f4f5f2;
+}
+
+.content {
+  width: 100%;
+  max-width: 540px;
+  margin: 0 auto;
+  display: grid;
+  gap: 14px;
+  padding: 24px 16px 36px;
+}
+
+.check {
+  width: 64px;
+  height: 64px;
+  border-radius: 999px;
+  background: var(--green-50);
+  color: var(--green-700);
+  border: 2.5px solid var(--green-700);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin: 4px auto 0;
+}
+
+.title,
+.subtitle {
+  margin: 0;
+  text-align: center;
+}
+
+.title {
+  font-size: 28px;
+  line-height: 1.05;
+  font-weight: 600;
+  color: #111111;
+}
+
+.subtitle {
+  color: #5f6762;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.summaryHero,
+.card,
+.driverCard,
+.rateSection,
+.actionsCard,
+.stateCard {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: #ffffff;
+}
+
+.summaryHero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 18px;
+}
+
+.heroLabel {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #8e978f;
+  margin-bottom: 6px;
+}
+
+.heroValue {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111111;
+}
+
+.statusPill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: #edf9f2;
+  color: #1a6b45;
+  padding: 7px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.card {
+  text-align: left;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-bottom: 0.5px solid var(--border);
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+.row span {
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+.row strong {
+  color: #111111;
+  font-size: 14px;
+  text-align: right;
+}
+
+.fare {
+  color: var(--green-700) !important;
+  font-size: 16px !important;
+  font-weight: 700;
+}
+
+.driverCard {
+  padding: 14px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.driverAvatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  background: var(--green-50);
+  color: var(--green-700);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.driverMeta {
+  display: grid;
+  gap: 4px;
+}
+
+.driverMeta strong {
+  font-size: 15px;
+  color: #111111;
+}
+
+.driverMeta span {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.actionsCard {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+}
+
+.primaryBtn,
+.submit,
+.homeBtn {
+  width: 100%;
+  border-radius: 12px;
+  padding: 13px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.12s ease;
+}
+
+.primaryBtn,
+.submit {
+  border: none;
+  background: var(--green-700);
+  color: #ffffff;
+}
+
+.primaryBtn:disabled,
+.submit:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.homeBtn {
+  border: 1px solid var(--border);
+  background: #ffffff;
+  color: #111111;
+}
+
+.rateSection {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+}
+
+.rateHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.rateLabel {
+  font-size: 13px;
+  font-weight: 600;
+  color: #111111;
+}
+
+.rateHint {
+  margin: 6px 0 0;
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.stars {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.star {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 0.5px solid var(--border);
+  background: transparent;
+  font-size: 18px;
+  color: #d1d5db;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.starActive {
+  color: #f59e0b;
+  border-color: #f59e0b;
+  background: #fffbeb;
+}
+
+.textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 12px;
+  resize: none;
+  font-size: 14px;
+  font-family: var(--font);
+  color: #111;
+  background: #fff;
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: #1a6b45;
+  box-shadow: 0 0 0 3px rgba(26, 107, 69, 0.08);
+}
+
+.counter {
+  font-size: 10px;
+  color: #9ca3af;
+  text-align: right;
+  margin-top: -6px;
+}
+
+.skip {
+  border: none;
+  background: transparent;
+  color: #1a6b45;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 0;
+  cursor: pointer;
+}
+
+.stateCard {
+  display: grid;
+  gap: 10px;
+  text-align: center;
+  padding: 24px 18px;
+}
+
+.stateActions {
+  display: grid;
+  gap: 10px;
+}
+
+@media (min-width: 768px) {
+  .content {
+    padding-top: 36px;
+  }
+
+  .title {
+    font-size: 34px;
+  }
+}

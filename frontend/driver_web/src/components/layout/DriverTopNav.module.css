@@ -1,0 +1,127 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  height: 52px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 18px;
+}
+
+.leftGroup {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.menuButton {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  color: #141a13;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+
+.menuButtonOpen {
+  border-color: #1a6b45;
+  color: #1a6b45;
+  background: #edf9f2;
+}
+
+.logo {
+  font-size: 17px;
+  font-weight: 500;
+  color: #141a13;
+  min-width: 0;
+}
+
+.centerNav {
+  display: none;
+}
+
+.actions {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  border: 2px solid #9ca3af;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: #6b7280;
+  background: #ffffff;
+}
+
+.avatarButton {
+  cursor: pointer;
+}
+
+.avatarOnline {
+  border-color: #1a6b45;
+  color: #1a6b45;
+}
+
+.avatarOffline {
+  border-color: #9ca3af;
+  color: #6b7280;
+}
+
+.avatarRide {
+  border-color: #2563eb;
+  color: #2563eb;
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 140px;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 14px 32px rgba(20, 26, 19, 0.08);
+  padding: 6px;
+}
+
+.dropdownItem {
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  padding: 10px 12px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 500;
+  color: #141a13;
+  cursor: pointer;
+}
+
+.dropdownItem:hover {
+  background: #edf9f2;
+  color: #1a6b45;
+}
+
+@media (min-width: 768px) {
+  .menuButton {
+    display: none;
+  }
+}

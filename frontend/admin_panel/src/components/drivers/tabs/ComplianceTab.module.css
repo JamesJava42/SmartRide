@@ -1,0 +1,29 @@
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+@media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+
+.card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cardTop { display: flex; align-items: center; gap: 8px; }
+
+.icon { font-size: 12px; font-weight: 700; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.icon_PASS { background: var(--green-100); color: var(--green-700); }
+.icon_FAIL { background: #FEE2E2; color: #DC2626; }
+.icon_PENDING { background: #FEF3C7; color: #92400E; }
+.icon_EXPIRED { background: #FEF3C7; color: #D97706; }
+.icon_NOT_CHECKED { background: var(--bg); color: var(--text-muted); }
+
+.label { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+.detail { font-size: 12px; color: var(--text-muted); }
+
+.sk { height: 100px; border-radius: var(--radius-md); background: linear-gradient(90deg, #F0F2EE 25%, #E8EBE4 50%, #F0F2EE 75%); background-size: 200% 100%; animation: shimmer 1.4s ease-in-out infinite; }
+@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }

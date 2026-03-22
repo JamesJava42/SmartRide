@@ -1,0 +1,88 @@
+.actions { display: flex; flex-direction: column; gap: 8px; }
+
+.btn {
+  width: 100%;
+  height: 38px;
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.approve { background: var(--green-700); color: #fff; border: none; }
+.approve:hover:not(:disabled) { background: #155c3b; }
+
+.reject { background: transparent; color: #DC2626; border: 1.5px solid #DC2626; }
+.reject:hover:not(:disabled) { background: #FEE2E2; }
+
+.suspend { background: transparent; color: #D97706; border: 1.5px solid #D97706; }
+.suspend:hover:not(:disabled) { background: #FEF3C7; }
+
+.reactivate { background: var(--green-50); color: var(--green-700); border: 1.5px solid var(--green-700); }
+.reactivate:hover:not(:disabled) { background: var(--green-100); }
+
+.neutral { background: var(--bg); color: var(--text-secondary); border: 1.5px solid var(--border); }
+.neutral:hover:not(:disabled) { border-color: var(--green-700); color: var(--green-700); }
+
+.confirm {
+  margin-top: 12px;
+  padding: 12px;
+  background: var(--bg);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font);
+  font-size: 13px;
+  color: var(--text-primary);
+  background: var(--white);
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.15s;
+  box-sizing: border-box;
+}
+.textarea:focus { border-color: var(--green-700); box-shadow: 0 0 0 3px rgba(26,107,69,.08); }
+
+.confirmText { font-size: 13px; color: var(--text-secondary); }
+
+.confirmRow { display: flex; align-items: center; justify-content: flex-end; gap: 12px; }
+
+.cancelLink {
+  background: none;
+  border: none;
+  font-size: 13px;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0;
+  font-family: var(--font);
+}
+.cancelLink:hover { color: var(--text-primary); }
+.cancelLink:disabled { opacity: 0.5; }
+
+.confirmBtn {
+  padding: 6px 16px;
+  background: var(--green-700);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.confirmBtn:hover:not(:disabled) { background: #155c3b; }
+.confirmBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.noActions { font-size: 13px; color: var(--text-muted); text-align: center; padding: 8px 0; }

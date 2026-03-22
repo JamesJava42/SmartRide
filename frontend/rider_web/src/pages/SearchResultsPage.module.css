@@ -1,0 +1,356 @@
+.page {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: #FFFFFF;
+}
+
+.navbar {
+  width: 100%;
+  height: 52px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #FFFFFF;
+  flex-shrink: 0;
+}
+
+.brand {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111111;
+  letter-spacing: -0.02em;
+}
+
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 2px solid #1A6B45;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1A6B45;
+}
+
+.logoutBtn {
+  font-size: 13px;
+  padding: 7px 16px;
+  border: 1px solid #D1D5DB;
+  border-radius: 20px;
+  background: #FFFFFF;
+  color: #111111;
+  cursor: pointer;
+}
+
+.body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.searchCol {
+  width: 280px;
+  flex-shrink: 0;
+  border-right: 0.5px solid #E2E5DE;
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.searchInner {
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  flex: 1;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.searchInner::-webkit-scrollbar {
+  display: none;
+}
+
+.vehicleCol {
+  width: 240px;
+  flex-shrink: 0;
+  border-left: 0.5px solid #E2E5DE;
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.mapCol {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0;
+}
+
+.searchBtn {
+  width: 100%;
+  padding: 10px;
+  background: #1A6B45;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 9px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: var(--font);
+}
+
+.footer {
+  width: 100%;
+  height: 42px;
+  background: #FFFFFF;
+  border-top: 0.5px solid #E2E5DE;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.footerLeft {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footerBrand,
+.footerLink {
+  font-size: 13px;
+  color: #111111;
+}
+
+.footerBrand {
+  font-weight: 700;
+}
+
+.footerSep {
+  color: #9CA3AF;
+}
+
+.footerCopy {
+  font-size: 11px;
+  color: #9CA3AF;
+  line-height: 1.5;
+}
+
+.mobileForm,
+.mobileRoute,
+.mobileVehicles,
+.mobileBook,
+.mobileFooter {
+  display: none;
+}
+
+.mobileTimeSeats {
+  display: flex;
+  gap: 8px;
+}
+
+.mobileControl {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 10px 14px;
+  border: 1px solid #D1D5DB;
+  border-radius: 10px;
+  background: #FFFFFF;
+  color: #111111;
+  font-size: 14px;
+  width: 100%;
+}
+
+.mobileSeatsWrap {
+  position: relative;
+}
+
+.mobileSeatsPicker {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  z-index: 50;
+  display: flex;
+  gap: 6px;
+  background: #FFFFFF;
+  border: 1px solid #D1D5DB;
+  border-radius: 10px;
+  padding: 8px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+}
+
+.mobileSeatOption {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: #F3F4F6;
+  color: #111111;
+}
+
+.mobileSeatOptionSelected {
+  background: #1A6B45;
+  color: #FFFFFF;
+}
+
+.chevron {
+  font-size: 11px;
+  color: #9CA3AF;
+}
+
+.mobileSearchBtn,
+.mobileBookBtn {
+  width: 100%;
+  padding: 14px;
+  background: #FFFFFF;
+  color: #111111;
+  border: 1px solid #D1D5DB;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: var(--font);
+  transition: background 0.12s, border-color 0.12s;
+}
+
+.mobileBookBtn:hover,
+.mobileSearchBtn:hover {
+  border-color: #1A6B45;
+  color: #1A6B45;
+}
+
+.footerLinks {
+  display: flex;
+  gap: 8px;
+  font-size: 12px;
+  color: #6B7280;
+}
+
+.routeReady {
+  font-size: 11px;
+  font-weight: 700;
+  color: #1A6B45;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0 0 2px;
+}
+
+.routeMeta {
+  font-size: 13px;
+  color: #6B7280;
+  margin: 0 0 10px;
+}
+
+.chooseBadge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  color: #1A6B45;
+  border: 1.5px solid #1A6B45;
+  border-radius: 5px;
+  padding: 3px 10px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .searchCol {
+    width: 240px;
+  }
+
+  .vehicleCol {
+    width: 210px;
+  }
+}
+
+@media (max-width: 767px) {
+  .page {
+    height: auto;
+    overflow: visible;
+    background: #FFFFFF;
+  }
+
+  .body {
+    flex-direction: column;
+    height: auto;
+    overflow: visible;
+  }
+
+  .searchCol {
+    display: none;
+  }
+
+  .vehicleCol {
+    display: none;
+  }
+
+  .mapCol {
+    width: 100%;
+    height: 220px;
+    flex: none;
+    order: 1;
+    border-radius: 0;
+  }
+
+  .mobileForm {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 12px 14px;
+    gap: 10px;
+  }
+
+  .mobileRoute {
+    display: block;
+    padding: 14px 12px 10px;
+  }
+
+  .mobileVehicles {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0 12px 8px;
+  }
+
+  .mobileBook {
+    display: block;
+    padding: 12px 12px 14px;
+  }
+
+  .mobileFooter {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 14px 12px 18px;
+    border-top: 0.5px solid #E5E7EB;
+  }
+
+  .footerBrand {
+    margin: 0 0 4px;
+  }
+
+  .footerCopy {
+    text-align: right;
+  }
+}

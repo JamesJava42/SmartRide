@@ -1,0 +1,170 @@
+.root { display: flex; flex-direction: column; gap: 16px; height: 100%; }
+.title { font-size: 22px; font-weight: 700; }
+
+.toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+.viewToggle { display: flex; border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+.toggleBtn { padding: 6px 12px; font-size: 13px; background: var(--white); color: var(--text-secondary); border: none; cursor: pointer; transition: all 0.15s; }
+.toggleBtn:hover { background: var(--bg); }
+.toggleBtnActive { background: var(--green-700); color: var(--white); }
+
+.splitView { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; flex: 1; min-height: 0; }
+.tablePanel { overflow: auto; }
+.mapPanel { min-height: 400px; }
+
+.fullTable { flex: 1; }
+
+.reportCard {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+  padding: 18px 20px;
+}
+
+.reportHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.reportTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.reportSubtitle {
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.reportMetric {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.reportMetricValue {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--green-700);
+  line-height: 1;
+}
+
+.reportMetricLabel {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.reportList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.reportRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: #fcfcfa;
+  padding: 14px 16px;
+}
+
+.reportRoute,
+.reportMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.reportEmpty {
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-md);
+  padding: 18px;
+  color: var(--text-muted);
+  font-size: 14px;
+  text-align: center;
+}
+
+.idCell,
+.productCell,
+.etaCell,
+.personCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.personCell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.primaryText {
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.secondaryText,
+.idMeta,
+.mutedValue {
+  color: var(--text-muted);
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+.idValue {
+  color: var(--text-primary);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.redispatchBtn {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--green-700);
+  padding: 7px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.redispatchBtn:hover {
+  border-color: var(--green-700);
+  background: var(--bg);
+}
+
+.redispatchBtn:disabled {
+  cursor: wait;
+  opacity: 0.6;
+}
+
+@media (max-width: 960px) {
+  .splitView {
+    grid-template-columns: 1fr;
+  }
+
+  .reportHeader,
+  .reportRow {
+    grid-template-columns: 1fr;
+  }
+
+  .reportMetric {
+    align-items: flex-start;
+  }
+}

@@ -1,0 +1,105 @@
+.formShell {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.titleBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.title {
+  font-size: 18px;
+  line-height: 1.2;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.subtitle {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.formGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.twoCol {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+@media (min-width: 768px) {
+  .twoCol {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+}
+
+.confirmEye {
+  right: 42px;
+}
+
+.confirmStatus {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+}
+
+.successState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.successIcon {
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  background: #edf9f2;
+  border: 1px solid #1a6b45;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.successTitle {
+  font-size: 18px;
+  line-height: 1.2;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.successSubtitle {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.successInfo {
+  width: 100%;
+  background: var(--bg);
+  border-radius: 14px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}

@@ -1,0 +1,40 @@
+.root { display: flex; flex-direction: column; gap: 16px; }
+.title { font-size: 22px; font-weight: 700; }
+
+.viewBtn {
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  color: var(--text-secondary);
+  transition: all 0.15s;
+}
+.viewBtn:hover { border-color: var(--green-700); color: var(--green-700); }
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.4);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  max-width: 520px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-md);
+}
+.modalTitle { font-size: 16px; font-weight: 700; margin-bottom: 16px; }
+.closeBtn { float: right; font-size: 18px; background: none; border: none; cursor: pointer; color: var(--text-muted); }
+.detailRow { display: flex; gap: 12px; margin-bottom: 10px; font-size: 13px; }
+.detailKey { font-weight: 600; color: var(--text-secondary); min-width: 120px; }
+.detailVal { color: var(--text-primary); }
+.jsonPre { margin-top: 12px; padding: 12px; background: var(--bg); border-radius: var(--radius-sm); font-size: 12px; font-family: monospace; white-space: pre-wrap; overflow-x: auto; }

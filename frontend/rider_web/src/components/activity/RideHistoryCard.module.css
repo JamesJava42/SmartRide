@@ -1,0 +1,222 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 16px;
+  border-bottom: 0.5px solid #f3f4f6;
+  background: #fff;
+  cursor: pointer;
+}
+
+.selected {
+  background: #edf9f2;
+  border-left: 3px solid #1a6b45;
+  padding-left: 21px;
+}
+
+.rowBetween {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.date {
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+.route {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.routeLine {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 12px;
+  color: #374151;
+  min-width: 0;
+}
+
+.connector {
+  width: 1px;
+  height: 8px;
+  margin-left: 4px;
+  background: #d1d5db;
+}
+
+.pickupDot,
+.dropoffDot {
+  width: 8px;
+  height: 8px;
+  margin-top: 4px;
+  flex: 0 0 auto;
+}
+
+.pickupDot {
+  border-radius: 50%;
+  background: #1a6b45;
+}
+
+.dropoffDot {
+  background: #111827;
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.meta {
+  font-size: 11px;
+  color: #6b7280;
+}
+
+.link {
+  font-size: 12px;
+  color: #1a6b45;
+  font-weight: 500;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 20px;
+  padding: 3px 9px;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.completed {
+  background: #edf9f2;
+  color: #1a6b45;
+}
+
+.cancelled {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.fare {
+  font-size: 15px;
+  font-weight: 700;
+  color: #111111;
+}
+
+.fareMuted {
+  color: #9ca3af;
+}
+
+.desktopWrap {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.iconCircle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.iconCompleted {
+  background: #edf9f2;
+  color: #1a6b45;
+}
+
+.iconCancelled {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.desktopMiddle {
+  flex: 1;
+  min-width: 0;
+}
+
+.desktopRoute {
+  margin-top: 4px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #111111;
+}
+
+.desktopMeta {
+  margin-top: 3px;
+  font-size: 11px;
+  color: #6b7280;
+}
+
+.desktopRight {
+  text-align: right;
+  flex: 0 0 auto;
+}
+
+.stars {
+  margin-top: 4px;
+  font-size: 11px;
+  color: #f59e0b;
+}
+
+.summaryStrip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-bottom: 0.5px solid #e5e7eb;
+  background: #ffffff;
+}
+
+.summaryCell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 14px 10px;
+  border-right: 1px solid #e5e7eb;
+}
+
+.summaryCell:last-child {
+  border-right: none;
+}
+
+.summaryCell strong {
+  font-size: 18px;
+  font-weight: 500;
+  color: #111111;
+}
+
+.summaryCell span {
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+.summaryAccent {
+  color: #1a6b45 !important;
+}
+
+.summaryDesktopOnly {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .card {
+    padding: 14px 24px;
+  }
+
+  .summaryStrip {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .summaryDesktopOnly {
+    display: flex;
+  }
+}

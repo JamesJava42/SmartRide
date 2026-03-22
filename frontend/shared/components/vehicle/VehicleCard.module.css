@@ -1,0 +1,251 @@
+.card {
+  background: #ffffff;
+  border: 0.5px solid #e2e5de;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px 20px 16px;
+}
+
+.iconBox {
+  width: 80px;
+  height: 72px;
+  background: #f4f5f2;
+  border-radius: 10px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.headerBody {
+  flex: 1;
+  min-width: 0;
+}
+
+.titleRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 9px;
+}
+
+.title {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--text-primary, #17211b);
+  line-height: 1.25;
+}
+
+.editButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: #1a6b45;
+  cursor: pointer;
+  font-family: var(--font, "Plus Jakarta Sans", system-ui, sans-serif);
+  font-size: 13px;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.editButton:hover {
+  text-decoration: underline;
+}
+
+.badgesRow {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+
+.plateBadge {
+  font-family: "DM Mono", "Courier New", monospace;
+  font-size: 12px;
+  font-weight: 500;
+  background: #f4f5f2;
+  border: 0.5px solid var(--border, #e2e5de);
+  border-radius: 6px;
+  padding: 3px 10px;
+  color: var(--text-primary, #17211b);
+  letter-spacing: 0.06em;
+}
+
+.activeBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.activeDot,
+.inactiveDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.activeDot {
+  background: #059669;
+}
+
+.inactiveDot {
+  background: #9ca3af;
+}
+
+.activeText,
+.inactiveText {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.activeText {
+  color: #065f46;
+}
+
+.inactiveText {
+  color: #6b7280;
+}
+
+.insetDivider {
+  height: 1px;
+  background: var(--border, #e2e5de);
+  margin: 0 20px;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr 1px 1fr 1px 1fr;
+  padding: 16px 20px;
+  align-items: center;
+}
+
+.statColumn {
+  min-width: 0;
+}
+
+.paddedColumn {
+  padding-left: 16px;
+}
+
+.separator {
+  width: 1px;
+  height: 34px;
+  background: var(--border, #e2e5de);
+  align-self: center;
+}
+
+.statLabel {
+  margin: 0 0 4px;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--text-secondary, #67746c);
+}
+
+.statValue {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary, #17211b);
+}
+
+.fullDivider {
+  height: 1px;
+  background: var(--border, #e2e5de);
+}
+
+.footer {
+  background: #f8f9f7;
+  padding: 11px 20px;
+  text-align: center;
+}
+
+.footerText {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-secondary, #67746c);
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, #f4f5f2 25%, #eceee9 50%, #f4f5f2 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+  border-radius: 4px;
+}
+
+.titleSkeleton {
+  width: 200px;
+  height: 18px;
+}
+
+.pillSkeleton {
+  width: 74px;
+  height: 24px;
+  border-radius: 9999px;
+}
+
+.pillSkeletonWide {
+  width: 96px;
+  height: 24px;
+  border-radius: 9999px;
+}
+
+.labelSkeleton {
+  width: 42px;
+  height: 10px;
+  margin-bottom: 6px;
+}
+
+.valueSkeleton {
+  width: 60px;
+  height: 18px;
+}
+
+.footerSkeleton {
+  width: 160px;
+  height: 14px;
+  margin: 0 auto;
+}
+
+@media (max-width: 640px) {
+  .header {
+    flex-direction: column;
+  }
+
+  .titleRow {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .statsGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .separator {
+    display: none;
+  }
+
+  .paddedColumn {
+    padding-left: 0;
+  }
+}

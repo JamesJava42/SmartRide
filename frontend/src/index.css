@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color: #17211b;
+  background: #f6f4ee;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: Manrope, ui-sans-serif, system-ui;
+  background:
+    radial-gradient(circle at top, rgba(58, 143, 91, 0.08), transparent 22%),
+    linear-gradient(180deg, #fbfaf6 0%, #f4f1ea 100%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.leaflet-container {
+  font: inherit;
+}

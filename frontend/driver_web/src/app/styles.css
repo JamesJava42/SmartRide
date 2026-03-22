@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color: #17211b;
+  background: #ffffff;
+  font-family: Manrope, ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #ffffff;
+  color: #17211b;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: rgba(58, 143, 91, 0.2);
+}
+
+.leaflet-container {
+  z-index: 0;
+  touch-action: pan-x pan-y;
+}
+
+.leaflet-pane,
+.leaflet-top,
+.leaflet-bottom,
+.leaflet-control,
+.leaflet-tooltip,
+.leaflet-popup {
+  z-index: 10 !important;
+}
+
+.leaflet-tile-pane,
+.leaflet-overlay-pane,
+.leaflet-shadow-pane,
+.leaflet-marker-pane {
+  z-index: 1 !important;
+}

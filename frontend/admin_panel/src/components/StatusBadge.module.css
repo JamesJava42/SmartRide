@@ -1,0 +1,35 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border-radius: 999px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.sm { font-size: 11px; padding: 2px 8px; }
+.md { font-size: 12px; padding: 3px 10px; }
+
+.dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.active { background: var(--status-active-bg); color: var(--status-active-text); }
+.active .dot { background: var(--status-active-text); }
+.pending { background: var(--status-pending-bg); color: var(--status-pending-text); }
+.pending .dot { background: var(--status-pending-text); }
+.suspended { background: var(--status-suspended-bg); color: var(--status-suspended-text); }
+.suspended .dot { background: var(--status-suspended-text); }
+.inactive { background: var(--status-inactive-bg); color: var(--status-inactive-text); }
+.inactive .dot { background: var(--status-inactive-text); }
+.enroute { background: var(--status-enroute-bg); color: var(--status-enroute-text); }
+.enroute .dot { background: var(--status-enroute-text); }
+.started { background: var(--status-started-bg); color: var(--status-started-text); }
+.started .dot { background: var(--status-started-text); }
+.assigned { background: var(--status-assigned-bg); color: var(--status-assigned-text); }
+.assigned .dot { background: var(--status-assigned-text); }
+.matching { background: var(--status-pending-bg); color: var(--status-pending-text); }
+.matching .dot { background: var(--status-pending-text); animation: pulse 1.2s infinite; }
+
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }

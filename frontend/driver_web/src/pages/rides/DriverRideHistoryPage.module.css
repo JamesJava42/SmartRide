@@ -1,0 +1,300 @@
+.page {
+  min-height: 100%;
+  background: #f4f5f2;
+  display: flex;
+  flex-direction: column;
+}
+
+.body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.listCol {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.detailCol {
+  width: 320px;
+  flex-shrink: 0;
+  border-left: 0.5px solid #e5e7eb;
+  background: #ffffff;
+  overflow-y: auto;
+}
+
+.hidden {
+  display: none;
+}
+
+.tabs {
+  display: flex;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.tab {
+  border: none;
+  background: transparent;
+  padding: 11px 16px;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.tabActive {
+  color: #1a6b45;
+  font-weight: 500;
+  border-bottom: 2px solid #1a6b45;
+}
+
+.summaryStrip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-bottom: 0.5px solid #e5e7eb;
+  background: #ffffff;
+}
+
+.summaryCell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 14px 10px;
+  border-right: 1px solid #e5e7eb;
+}
+
+.summaryCell:last-child {
+  border-right: none;
+}
+
+.summaryCell strong {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.summaryCell span {
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+  padding: 12px 24px;
+  flex-wrap: wrap;
+}
+
+.pill {
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  color: #6b7280;
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.pillActive {
+  border-color: #1a6b45;
+  background: #edf9f2;
+  color: #1a6b45;
+}
+
+.rideList {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.monthHeader {
+  background: #f9faf8;
+  padding: 10px 24px 4px;
+  font-size: 10px;
+  font-weight: 600;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.hero {
+  margin: 16px 24px 0;
+  border-radius: 16px;
+  background: #1a6b45;
+  color: white;
+  padding: 18px;
+}
+
+.heroLabel {
+  font-size: 11px;
+  color: rgba(255,255,255,0.7);
+}
+
+.heroAmount {
+  margin-top: 8px;
+  font-size: 32px;
+  font-weight: 500;
+}
+
+.heroSub {
+  margin-top: 6px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.65);
+}
+
+.chipRow {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.chip {
+  border: 1px solid rgba(255,255,255,0.7);
+  background: transparent;
+  color: rgba(255,255,255,0.85);
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-size: 12px;
+}
+
+.chipActive {
+  background: #ffffff;
+  color: #1a6b45;
+}
+
+.card {
+  margin: 16px 24px 0;
+  border: 0.5px solid #e5e7eb;
+  border-radius: 10px;
+  background: #ffffff;
+  padding: 16px;
+}
+
+.chart {
+  display: flex;
+  align-items: end;
+  gap: 8px;
+  height: 140px;
+  margin-top: 14px;
+}
+
+.barCol {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.bar {
+  width: 100%;
+  min-height: 4px;
+  border-radius: 4px 4px 0 0;
+  background: #1a6b45;
+}
+
+.barLabel {
+  font-size: 9px;
+  color: #9ca3af;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 0.5px solid #f3f4f6;
+  padding: 12px 0;
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+.label {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.value {
+  font-size: 12px;
+  font-weight: 700;
+  color: #111111;
+}
+
+.accent {
+  color: #1a6b45;
+}
+
+.note {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+.ratingHero {
+  text-align: center;
+  padding: 24px 16px 12px;
+}
+
+.ratingValue {
+  font-size: 42px;
+  font-weight: 500;
+  color: #111111;
+}
+
+.stars {
+  margin-top: 8px;
+  color: #f59e0b;
+  font-size: 18px;
+}
+
+.sub {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.breakdownRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.progressTrack {
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  background: #e5e7eb;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: #f59e0b;
+}
+
+.skeleton {
+  height: 88px;
+  border-bottom: 0.5px solid #f3f4f6;
+  background: linear-gradient(90deg, #f4f5f2 25%, #eceee9 50%, #f4f5f2 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+.emptyState {
+  display: grid;
+  place-items: center;
+  min-height: 320px;
+  padding: 24px;
+  text-align: center;
+  color: #6b7280;
+}
+
+@keyframes shimmer {
+  from { background-position: -200% 0; }
+  to { background-position: 200% 0; }
+}

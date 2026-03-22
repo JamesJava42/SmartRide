@@ -1,0 +1,159 @@
+.split { display: grid; grid-template-columns: 310px 1fr; gap: 16px; align-items: start; }
+@media (max-width: 768px) { .split { grid-template-columns: 1fr; } }
+
+.list {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.listHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  background: #F9FAF8;
+}
+.listTitle { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); }
+.listCount { font-size: 11px; font-weight: 600; color: var(--green-700); }
+
+.docRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.12s;
+  gap: 8px;
+}
+.docRow:last-child { border-bottom: none; }
+.docRow:hover { background: var(--bg); }
+.docRowActive { background: var(--green-50); border-left: 2px solid var(--green-700); }
+
+.docInfo { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
+.docLabel { font-size: 13px; font-weight: 600; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.docDate { font-size: 11px; color: var(--text-muted); }
+.docMissing { font-size: 11px; color: var(--text-muted); font-style: italic; }
+
+.docRowRight { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+.notUploadedBadge { font-size: 12px; color: var(--text-disabled); }
+
+.uploadRowBtn {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--white);
+  color: var(--text-secondary);
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: var(--font);
+  transition: all 0.12s;
+}
+.uploadRowBtn:hover { border-color: var(--green-700); color: var(--green-700); background: var(--green-50); }
+
+/* Inline upload form */
+.uploadForm {
+  padding: 12px 16px;
+  background: var(--green-50);
+  border-bottom: 1px solid var(--border);
+  border-left: 3px solid var(--green-700);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.uploadHint { font-size: 12px; color: var(--text-secondary); }
+.urlInput {
+  width: 100%;
+  padding: 7px 10px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-family: var(--font);
+  outline: none;
+  transition: border-color 0.15s;
+  box-sizing: border-box;
+}
+.urlInput:focus { border-color: var(--green-700); box-shadow: 0 0 0 3px rgba(26,107,69,.08); }
+.uploadFormActions { display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
+.cancelSmallBtn { font-size: 12px; color: var(--text-muted); background: none; border: none; cursor: pointer; font-family: var(--font); padding: 0; }
+.cancelSmallBtn:hover { color: var(--text-primary); }
+.uploadSubmitBtn {
+  padding: 6px 14px;
+  background: var(--green-700);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font);
+  transition: background 0.15s;
+}
+.uploadSubmitBtn:hover:not(:disabled) { background: #155c3b; }
+.uploadSubmitBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.preview {}
+
+.emptyPreview { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; gap: 12px; color: var(--text-muted); font-size: 13px; }
+.emptyIcon { font-size: 28px; }
+.notUploadedText { font-size: 13px; color: var(--text-muted); }
+.uploadPromptBtn {
+  padding: 8px 20px;
+  background: var(--green-700);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font);
+}
+.uploadPromptBtn:hover { background: #155c3b; }
+
+.previewHeader { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.previewTitle { font-size: 15px; font-weight: 700; color: var(--text-primary); }
+
+.previewMeta { display: flex; gap: 12px; margin-bottom: 6px; font-size: 13px; }
+.metaLabel { color: var(--text-muted); min-width: 80px; }
+.metaVal { color: var(--text-primary); font-weight: 600; }
+
+.rejectReason { font-size: 13px; color: #DC2626; margin-top: 8px; }
+
+.filePreview {
+  height: 200px;
+  background: var(--bg);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 12px 0;
+  overflow: hidden;
+}
+.docImage { width: 100%; height: 100%; object-fit: contain; }
+.fileLink { font-size: 13px; color: var(--green-700); text-decoration: underline; }
+.noFile { font-size: 13px; color: var(--text-muted); }
+
+.docActions { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+
+.approveBtn { padding: 7px 16px; background: var(--green-700); color: #fff; border: none; border-radius: var(--radius-sm); font-size: 13px; font-weight: 600; cursor: pointer; font-family: var(--font); }
+.approveBtn:disabled { opacity: 0.5; }
+
+.rejectBtn { padding: 7px 16px; background: transparent; color: #DC2626; border: 1.5px solid #DC2626; border-radius: var(--radius-sm); font-size: 13px; font-weight: 600; cursor: pointer; font-family: var(--font); }
+
+.rejectForm { display: flex; flex-direction: column; gap: 8px; }
+.rejectTextarea { width: 100%; padding: 8px 10px; border: 1.5px solid var(--border); border-radius: var(--radius-sm); font-family: var(--font); font-size: 13px; outline: none; resize: vertical; box-sizing: border-box; }
+.rejectTextarea:focus { border-color: #DC2626; }
+.confirmRejectBtn { padding: 7px 16px; background: #DC2626; color: #fff; border: none; border-radius: var(--radius-sm); font-size: 13px; font-weight: 600; cursor: pointer; font-family: var(--font); }
+.confirmRejectBtn:disabled { opacity: 0.5; }
+
+.approvedNote { font-size: 13px; color: var(--green-700); font-weight: 600; margin-top: 8px; }
+
+.loading {}
+.sk { height: 300px; border-radius: var(--radius-lg); background: linear-gradient(90deg, #F0F2EE 25%, #E8EBE4 50%, #F0F2EE 75%); background-size: 200% 100%; animation: shimmer 1.4s ease-in-out infinite; }
+@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }

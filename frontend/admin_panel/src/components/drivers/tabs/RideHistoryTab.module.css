@@ -1,0 +1,14 @@
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px; }
+
+.statCard {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.statNum { font-size: 22px; font-weight: 800; color: var(--green-700); }
+.statLabel { font-size: 12px; color: var(--text-muted); }

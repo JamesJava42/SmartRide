@@ -1,0 +1,15 @@
+.page { min-height:100vh; background:#fff; }
+.content { padding:14px 12px; display:grid; gap:12px; }
+.headerIcon { width:46px; height:46px; border-radius:999px; background:var(--green-50); color:var(--green-700); border:2px solid var(--green-700); display:flex; align-items:center; justify-content:center; margin:0 auto; font-weight:700; }
+.title,.subtitle { text-align:center; margin:0; }
+.title { font-size:17px; font-weight:500; }
+.subtitle { color:var(--text-secondary); font-size:12px; }
+.card { border:0.5px solid var(--border); border-radius:11px; overflow:hidden; }
+.row { display:flex; justify-content:space-between; gap:12px; padding:9px 12px; border-bottom:0.5px solid var(--border); font-size:12px; align-items:flex-start; }
+.row:last-child { border-bottom:none; }
+.row span { color:var(--text-secondary); font-size:11px; flex-shrink:0; }
+.row strong { text-align:right; }
+.fare { color:var(--green-700); font-size:13px; }
+.note { background:var(--bg); border-radius:9px; padding:9px 11px; font-size:11px; color:var(--text-secondary); }
+.confirm { width:100%; border:none; border-radius:10px; background:var(--green-700); color:#fff; padding:12px; font-size:13px; font-weight:500; }
+.cancel { border:none; background:transparent; color:var(--text-secondary); text-align:center; font-size:12px; }

@@ -1,0 +1,35 @@
+.map {
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+  position: relative;
+}
+
+.zoomStack {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 400;
+  display: flex;
+  flex-direction: column;
+}
+
+.zoomBtn {
+  width: 24px;
+  height: 24px;
+  border: 0.5px solid var(--border);
+  background: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.zoomBtn:first-child {
+  border-radius: 5px 5px 0 0;
+}
+
+.zoomBtnBottom {
+  border-top: 0;
+  border-radius: 0 0 5px 5px;
+}

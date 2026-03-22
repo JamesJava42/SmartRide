@@ -1,0 +1,385 @@
+.profilePage {
+    display: flex;
+    height: 100%;
+    background: #F4F5F2;
+    overflow: hidden;
+}
+
+.identityCol {
+    width: 330px;
+    flex-shrink: 0;
+    border-right: 0.5px solid #E5E7EB;
+    background: #FFFFFF;
+    padding: 36px 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+}
+
+.avatarCircle {
+    width: 92px;
+    height: 92px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    border: 2.5px solid #1A6B45;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    font-weight: 500;
+    color: #1A6B45;
+    letter-spacing: 0.02em;
+    flex-shrink: 0;
+    margin-bottom: 16px;
+}
+
+.identityText {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.driverName {
+    font-size: 20px;
+    font-weight: 700;
+    color: #111111;
+    text-align: center;
+    margin-bottom: 4px;
+    letter-spacing: -0.01em;
+}
+
+.driverEmail {
+    font-size: 14px;
+    color: #6B7280;
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.approvedBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #EDF9F2;
+    color: #1A6B45;
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 28px;
+}
+
+.badgeDot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #1A6B45;
+    flex-shrink: 0;
+}
+
+.statsBlock {
+    width: 100%;
+    margin-bottom: 28px;
+}
+
+.statRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 0.5px solid #F3F4F6;
+}
+
+.statRow:last-child {
+    border-bottom: none;
+}
+
+.statLabel {
+    font-size: 14px;
+    color: #6B7280;
+    font-weight: 400;
+}
+
+.statValue {
+    font-size: 14px;
+    font-weight: 700;
+    color: #111111;
+}
+
+.logoutBtn {
+    width: 100%;
+    padding: 14px;
+    background: #FFFFFF;
+    color: #EF4444;
+    border: 1.5px solid #EF4444;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: var(--font);
+    transition: background 0.12s;
+}
+
+.logoutBtn:hover {
+    background: #FEF2F2;
+}
+
+.infoCol {
+    flex: 1;
+    min-width: 0;
+    padding: 28px 32px;
+    background: #F4F5F2;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.infoSection {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sectionLabel {
+    font-size: 11px;
+    font-weight: 600;
+    color: #9CA3AF;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+}
+
+.infoCard {
+    background: #FFFFFF;
+    border-radius: 12px;
+    border: 0.5px solid #E5E7EB;
+    overflow: hidden;
+}
+
+.infoRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 13px 18px;
+    border-bottom: 0.5px solid #F3F4F6;
+    gap: 16px;
+}
+
+.infoRowLast,
+.infoRow:last-child {
+    border-bottom: none;
+}
+
+.infoLabel {
+    font-size: 14px;
+    color: #6B7280;
+    font-weight: 400;
+}
+
+.infoValue {
+    font-size: 14px;
+    font-weight: 700;
+    color: #111111;
+    text-align: right;
+}
+
+.infoValueMono {
+    font-size: 14px;
+    font-weight: 700;
+    color: #111111;
+    text-align: right;
+    font-family: 'Courier New', Courier, monospace;
+    letter-spacing: 0.05em;
+}
+
+.infoLink {
+    font-size: 14px;
+    font-weight: 500;
+    color: #1A6B45;
+    cursor: pointer;
+    text-align: right;
+    border: none;
+    background: transparent;
+    padding: 0;
+    font-family: var(--font);
+}
+
+.statusBadge {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.amberText {
+    color: #F59E0B;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.redText {
+    color: #EF4444;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.errorState {
+    display: grid;
+    place-items: center;
+    height: 100%;
+    padding: 32px;
+    background: #F4F5F2;
+    gap: 14px;
+    text-align: center;
+}
+
+.retryBtn {
+    border-radius: 10px;
+    border: 1px solid #E5E7EB;
+    background: #FFFFFF;
+    padding: 10px 14px;
+    color: #111111;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: var(--font);
+    cursor: pointer;
+}
+
+.avatarSkeleton,
+.nameSkeleton,
+.emailSkeleton,
+.badgeSkeleton,
+.statSkeleton,
+.buttonSkeleton,
+.sectionSkeleton,
+.rowSkeleton {
+    background: linear-gradient(90deg, #f3f4f6 25%, #eceff1 50%, #f3f4f6 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.4s infinite linear;
+}
+
+.avatarSkeleton {
+    width: 92px;
+    height: 92px;
+    border-radius: 50%;
+    margin-bottom: 16px;
+}
+
+.nameSkeleton {
+    width: 180px;
+    height: 24px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
+.emailSkeleton {
+    width: 210px;
+    height: 18px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+
+.badgeSkeleton {
+    width: 132px;
+    height: 28px;
+    border-radius: 20px;
+    margin-bottom: 28px;
+}
+
+.statSkeleton {
+    width: 100%;
+    height: 40px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.buttonSkeleton {
+    width: 100%;
+    height: 48px;
+    border-radius: 10px;
+}
+
+.sectionSkeleton {
+    width: 180px;
+    height: 12px;
+    border-radius: 6px;
+}
+
+.rowSkeleton {
+    width: 100%;
+    height: 48px;
+    border-radius: 0;
+}
+
+@keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+@media (max-width: 767px) {
+    .profilePage {
+        flex-direction: column;
+        height: auto;
+        overflow: visible;
+    }
+
+    .identityCol {
+        width: 100%;
+        border-right: none;
+        border-bottom: 0.5px solid #E5E7EB;
+        padding: 20px 16px;
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .avatarCircle {
+        width: 62px;
+        height: 62px;
+        font-size: 20px;
+        margin-bottom: 0;
+        flex-shrink: 0;
+    }
+
+    .avatarSkeleton {
+        width: 62px;
+        height: 62px;
+        margin-bottom: 0;
+        flex-shrink: 0;
+    }
+
+    .identityText {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .driverName {
+        text-align: left;
+        font-size: 17px;
+    }
+
+    .driverEmail {
+        text-align: left;
+    }
+
+    .approvedBadge {
+        margin-bottom: 0;
+    }
+
+    .statsBlock {
+        margin-bottom: 0;
+    }
+
+    .logoutBtn {
+        margin-top: 16px;
+    }
+
+    .infoCol {
+        padding: 16px;
+        gap: 16px;
+    }
+}

@@ -1,0 +1,47 @@
+.textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font);
+  font-size: 13px;
+  color: var(--text-primary);
+  background: var(--white);
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.15s;
+  box-sizing: border-box;
+}
+.textarea:focus { border-color: var(--green-700); box-shadow: 0 0 0 3px rgba(26,107,69,.08); }
+
+.textareaFooter { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; }
+.counter { font-size: 11px; color: var(--text-muted); }
+
+.saveBtn {
+  padding: 7px 16px;
+  background: var(--green-700);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.saveBtn:hover:not(:disabled) { background: #155c3b; }
+.saveBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.list { margin-top: 16px; display: flex; flex-direction: column; gap: 0; }
+
+.note { padding: 12px 0; border-bottom: 1px solid var(--border); }
+.note:last-child { border-bottom: none; }
+.noteMeta { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+.noteAuthor { font-size: 13px; font-weight: 700; color: var(--text-primary); }
+.noteDate { font-size: 12px; color: var(--text-muted); }
+.noteText { font-size: 14px; color: var(--text-primary); line-height: 1.5; }
+
+.empty { font-size: 13px; color: var(--text-muted); text-align: center; padding: 16px 0; }
+
+.sk { height: 60px; border-radius: var(--radius-sm); background: linear-gradient(90deg, #F0F2EE 25%, #E8EBE4 50%, #F0F2EE 75%); background-size: 200% 100%; animation: shimmer 1.4s ease-in-out infinite; margin-bottom: 8px; }
+@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }

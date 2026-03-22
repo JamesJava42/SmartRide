@@ -1,0 +1,20 @@
+.circle {
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  border: 2.5px solid #ffffff;
+  background: rgba(255, 255, 255, 0.2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+}
+
+.urgent {
+  background: rgba(239, 68, 68, 0.28);
+}
+
+.seconds {
+  font-size: 18px;
+  font-weight: 700;
+}

@@ -1,0 +1,16 @@
+.root { display: flex; flex-direction: column; gap: 16px; }
+.title { font-size: 22px; font-weight: 700; }
+.toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.progressWrap { width: 80px; }
+.progressBar { height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; margin-top: 2px; }
+.progressFill { height: 100%; background: var(--green-700); border-radius: 2px; }
+.reviewBtn {
+  padding: 5px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--green-700);
+  color: var(--white);
+  border-radius: var(--radius-sm);
+  transition: background 0.15s;
+}
+.reviewBtn:hover { background: #155c3b; }

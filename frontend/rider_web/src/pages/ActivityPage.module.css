@@ -1,0 +1,185 @@
+.page {
+  min-height: 100vh;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+.body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.listCol {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.rideList {
+  flex: 1;
+  overflow-y: auto;
+  background: #ffffff;
+}
+
+.detailCol {
+  width: 340px;
+  flex-shrink: 0;
+  border-left: 0.5px solid #e5e7eb;
+  overflow-y: auto;
+  background: #ffffff;
+}
+
+.hidden {
+  display: none;
+}
+
+.tabs {
+  display: flex;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.tab {
+  border: none;
+  background: transparent;
+  color: #6b7280;
+  font-size: 13px;
+  padding: 11px 8px;
+  flex: 1;
+}
+
+.tabActive {
+  color: #1a6b45;
+  font-weight: 500;
+  border-bottom: 2px solid #1a6b45;
+}
+
+.desktopTab {
+  flex: 0 0 auto;
+  padding: 11px 16px;
+}
+
+.filters {
+  display: none;
+}
+
+.monthHeader {
+  background: #f9faf8;
+  padding: 8px 16px 2px;
+  font-size: 10px;
+  font-weight: 600;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.emptyState,
+.errorState {
+  display: grid;
+  place-items: center;
+  min-height: 320px;
+  padding: 24px;
+  text-align: center;
+}
+
+.emptyIcon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #f3f4f6;
+  display: grid;
+  place-items: center;
+  color: #9ca3af;
+  font-size: 28px;
+}
+
+.emptyTitle {
+  margin-top: 14px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.emptySub {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #9ca3af;
+  line-height: 1.5;
+}
+
+.retryBtn {
+  margin-top: 14px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 10px 16px;
+  cursor: pointer;
+}
+
+.skeletonCard {
+  height: 96px;
+  border-bottom: 0.5px solid #f3f4f6;
+  background: linear-gradient(90deg, #f4f5f2 25%, #eceee9 50%, #f4f5f2 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  from { background-position: -200% 0; }
+  to { background-position: 200% 0; }
+}
+
+@media (min-width: 768px) {
+  .tab {
+    flex: 0 0 auto;
+    padding: 11px 16px;
+  }
+
+  .filters {
+    display: flex;
+    gap: 10px;
+    padding: 12px 24px;
+    flex-wrap: wrap;
+  }
+
+  .pill {
+    border: 1px solid #e5e7eb;
+    background: #ffffff;
+    color: #6b7280;
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .pillActive {
+    border-color: #1a6b45;
+    background: #edf9f2;
+    color: #1a6b45;
+  }
+
+  .monthHeader {
+    padding: 10px 24px 4px;
+  }
+}
+
+@media (max-width: 767px) {
+  .body {
+    flex-direction: column;
+    overflow: visible;
+  }
+
+  .listCol,
+  .rideList {
+    overflow: visible;
+  }
+
+  .detailCol {
+    display: none;
+  }
+}

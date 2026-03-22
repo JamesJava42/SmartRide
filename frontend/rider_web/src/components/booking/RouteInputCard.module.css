@@ -1,0 +1,350 @@
+.wrapper {
+  position: relative;
+}
+
+.card {
+  border: 0.5px solid #E2E5DE;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #FFFFFF;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 14px;
+  cursor: pointer;
+  min-height: 52px;
+  transition: background 0.15s ease;
+  user-select: none;
+}
+
+.row:hover,
+.row:active {
+  background: #FAFAF8;
+}
+
+.dragging {
+  opacity: 0.5;
+}
+
+.dragover {
+  background: #EDF9F2;
+}
+
+.swapping {
+  animation: swapFlash 0.4s ease;
+}
+
+@keyframes swapFlash {
+  0% { background: #FFFFFF; }
+  30% { background: #EDF9F2; }
+  100% { background: #FFFFFF; }
+}
+
+.iconPickup {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #1A6B45;
+  flex-shrink: 0;
+}
+
+.iconDropoff {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  background: #141A13;
+  flex-shrink: 0;
+}
+
+.fieldText {
+  flex: 1;
+  font-size: 14px;
+  color: #141A13;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.fieldInput {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  color: #141A13;
+  font-size: 14px;
+  outline: none;
+  padding: 0;
+}
+
+.fieldInput:focus {
+  outline: none;
+}
+
+.placeholder {
+  color: #B8C4B3;
+}
+
+.changeLink {
+  font-size: 11px;
+  color: #1A6B45;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.divider {
+  height: 32px;
+  background: #F8F9F7;
+  border-top: 0.5px solid #E2E5DE;
+  border-bottom: 0.5px solid #E2E5DE;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+}
+
+.dividerLine {
+  flex: 1;
+  height: 0.5px;
+  background: #E2E5DE;
+}
+
+.swapBtn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 0.5px solid #E2E5DE;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  margin: 0 8px;
+  transition: transform 0.1s ease, background 0.1s ease;
+}
+
+.swapBtn:active {
+  transform: scale(0.88);
+  background: #EDF9F2;
+}
+
+.dragHint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 11px;
+  color: #B8C4B3;
+  text-align: center;
+  margin-top: 6px;
+}
+
+.editorIcon {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 0;
+  background: #D1D5DB;
+  color: #5A6B56;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.suggestions {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 8px);
+  z-index: 40;
+  border: 0.5px solid #E2E5DE;
+  border-radius: 14px;
+  background: #FFFFFF;
+  box-shadow: 0 18px 40px rgba(15, 23, 18, 0.12);
+  overflow: hidden;
+}
+
+.suggestionsInner {
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.suggestionItem {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: #FFFFFF;
+  border-bottom: 0.5px solid #EDEFEA;
+  text-align: left;
+  cursor: pointer;
+}
+
+.suggestionItem:last-child {
+  border-bottom: 0;
+}
+
+.suggestionItem:hover {
+  background: #FAFAF8;
+}
+
+.suggestionActive {
+  background: #EDF9F2;
+}
+
+.suggestionIcon {
+  color: #9CA3AF;
+  flex-shrink: 0;
+}
+
+.suggestionMeta {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.suggestionText {
+  min-width: 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: #141A13;
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.suggestionSubtext {
+  font-size: 12px;
+  color: #9CA3AF;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.suggestionMuted {
+  padding: 14px;
+  font-size: 13px;
+  color: #8A9B85;
+}
+
+.suggestionEmpty {
+  padding: 18px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #9CA3AF;
+}
+
+.recentLabel {
+  font-size: 10px;
+  color: #9CA3AF;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 8px 14px 4px;
+}
+
+.skeleton {
+  height: 48px;
+  margin: 8px 14px 0;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #F4F5F2 25%, #ECEEE9 50%, #F4F5F2 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+.currentCheck {
+  color: #1A6B45;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .card {
+    border-radius: 10px;
+  }
+
+  .row {
+    padding: 12px 0;
+    min-height: auto;
+    margin: 0;
+  }
+
+  .iconPickup {
+    width: 8px;
+    height: 8px;
+  }
+
+  .iconDropoff {
+    width: 11px;
+    height: 11px;
+    border-radius: 2.5px;
+    background: #111111;
+  }
+
+  .fieldText {
+    font-size: 14px;
+  }
+
+  .placeholder {
+    color: #9CA3AF;
+  }
+
+  .changeLink {
+    font-size: 13px;
+    margin-left: auto;
+  }
+
+  .divider {
+    height: auto;
+    padding: 4px 0;
+    background: transparent;
+    border-top: 0;
+    border-bottom: 0;
+  }
+
+  .dividerLine {
+    height: 1px;
+    background: #E5E7EB;
+  }
+
+  .swapBtn {
+    width: 28px;
+    height: 28px;
+    margin: 0 8px;
+    border: 1px solid #D1D5DB;
+    padding: 0;
+  }
+
+  .swapBtn svg {
+    width: 11px;
+    height: 11px;
+  }
+
+  .swapBtn svg path {
+    stroke: #6B7280;
+    stroke-width: 1.6;
+  }
+
+  .fieldInput {
+    font-size: 16px;
+  }
+}

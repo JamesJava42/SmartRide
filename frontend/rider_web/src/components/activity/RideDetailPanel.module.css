@@ -1,0 +1,233 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px;
+  background: #ffffff;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.headerTitle {
+  font-size: 14px;
+  font-weight: 500;
+  color: #111111;
+}
+
+.closeBtn,
+.backBtn {
+  border: none;
+  background: #f3f4f6;
+  border-radius: 999px;
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+}
+
+.mobileHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 0.5px solid #e5e7eb;
+}
+
+.spacer {
+  width: 52px;
+}
+
+.mapCard {
+  height: 140px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #e8f0e4;
+  border: 0.5px solid #e5e7eb;
+}
+
+.statusRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.completed {
+  background: #edf9f2;
+  color: #1a6b45;
+}
+
+.cancelled {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.fare {
+  font-size: 22px;
+  font-weight: 700;
+  color: #111111;
+}
+
+.fareMuted {
+  color: #9ca3af;
+}
+
+.routeCard,
+.detailsCard,
+.ratingCard {
+  border-radius: 9px;
+  border: 0.5px solid #e5e7eb;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.routeCard {
+  background: #f9faf8;
+  padding: 12px;
+}
+
+.routeRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 12px;
+  color: #374151;
+}
+
+.connector {
+  width: 1px;
+  height: 12px;
+  margin: 4px 0 4px 4px;
+  background: #d1d5db;
+}
+
+.dot,
+.square {
+  width: 8px;
+  height: 8px;
+  margin-top: 4px;
+  flex: 0 0 auto;
+}
+
+.dot {
+  border-radius: 50%;
+  background: #1a6b45;
+}
+
+.square {
+  background: #111111;
+}
+
+.detailRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  border-bottom: 0.5px solid #f3f4f6;
+}
+
+.detailRow:last-child {
+  border-bottom: none;
+}
+
+.label {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.value {
+  font-size: 12px;
+  font-weight: 700;
+  color: #111111;
+  text-align: right;
+}
+
+.valueAccent {
+  color: #1a6b45;
+}
+
+.ratingCard {
+  padding: 14px;
+}
+
+.ratingTitle {
+  font-size: 12px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.stars {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.starBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 0.5px solid #e5e7eb;
+  background: #ffffff;
+  color: #9ca3af;
+  font-size: 16px;
+}
+
+.starActive {
+  border-color: #f59e0b;
+  background: #fffbeb;
+  color: #f59e0b;
+}
+
+.comment {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #6b7280;
+  font-style: italic;
+}
+
+.downloadBtn,
+.submitBtn {
+  width: 100%;
+  border: none;
+  border-radius: 9px;
+  padding: 11px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.downloadBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.submitBtn {
+  margin-top: 12px;
+  background: #1a6b45;
+  color: #ffffff;
+}
+
+.stateCard {
+  display: grid;
+  place-items: center;
+  min-height: 220px;
+  padding: 24px;
+  text-align: center;
+  color: #6b7280;
+}

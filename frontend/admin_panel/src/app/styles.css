@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --white: #FFFFFF;
+  --bg: #F4F5F2;
+  --card: #FFFFFF;
+  --green-700: #1A6B45;
+  --green-100: #D6F5E8;
+  --green-50: #EDF9F2;
+  --text-primary: #141A13;
+  --text-secondary: #5A6B56;
+  --text-muted: #8A9B85;
+  --text-disabled: #B8C4B3;
+  --border: #E2E5DE;
+  --border-strong: #C8D3C4;
+  --status-active-bg: #D1FAE5;
+  --status-active-text: #065F46;
+  --status-pending-bg: #FEF3C7;
+  --status-pending-text: #92400E;
+  --status-suspended-bg: #FEE2E2;
+  --status-suspended-text: #991B1B;
+  --status-inactive-bg: #F3F4F6;
+  --status-inactive-text: #6B7280;
+  --status-enroute-bg: #DBEAFE;
+  --status-enroute-text: #1E40AF;
+  --status-started-bg: #D1FAE5;
+  --status-started-text: #065F46;
+  --status-assigned-bg: #EDE9FE;
+  --status-assigned-text: #5B21B6;
+  --shadow-sm: 0 1px 3px rgba(20,26,19,.06), 0 1px 2px rgba(20,26,19,.04);
+  --shadow-md: 0 2px 8px rgba(20,26,19,.08), 0 4px 12px rgba(20,26,19,.05);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --sidebar-width: 160px;
+  --navbar-height: 52px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font); background: var(--bg); color: var(--text-primary); font-size: 14px; line-height: 1.5; }
+a { text-decoration: none; color: inherit; }
+button { cursor: pointer; font-family: var(--font); border: none; background: none; }
+
+#root { min-height: 100vh; }
+
+.leaflet-container {
+  z-index: 0;
+  touch-action: pan-x pan-y;
+}
+
+.leaflet-pane,
+.leaflet-top,
+.leaflet-bottom,
+.leaflet-control,
+.leaflet-tooltip,
+.leaflet-popup {
+  z-index: 10 !important;
+}
+
+.leaflet-tile-pane,
+.leaflet-overlay-pane,
+.leaflet-shadow-pane,
+.leaflet-marker-pane {
+  z-index: 1 !important;
+}

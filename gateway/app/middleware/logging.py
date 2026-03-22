@@ -1,0 +1,1 @@
+"""Gateway logging middleware placeholder."""

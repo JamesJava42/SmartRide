@@ -1,0 +1,207 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: rideconnect_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "55432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7
+    container_name: rideconnect_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  bootstrap:
+    build:
+      context: .
+      dockerfile: infra/Dockerfile.bootstrap
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    env_file:
+      - .env
+    restart: "no"
+
+  auth_service:
+    build:
+      context: .
+      dockerfile: services/auth_service/Dockerfile
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      bootstrap:
+        condition: service_completed_successfully
+    env_file:
+      - .env
+    ports:
+      - "8001:8001"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8001/api/v1/health')"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+
+  marketplace_service:
+    build:
+      context: .
+      dockerfile: services/marketplace_service/Dockerfile
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      bootstrap:
+        condition: service_completed_successfully
+    env_file:
+      - .env
+    ports:
+      - "8002:8002"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8002/api/v1/health')"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+
+  operations_service:
+    build:
+      context: .
+      dockerfile: services/operations_service/Dockerfile
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      bootstrap:
+        condition: service_completed_successfully
+    env_file:
+      - .env
+    ports:
+      - "8003:8003"
+    volumes:
+      - operations_media:/app/media
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8003/api/v1/health')"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+
+  notification_service:
+    build:
+      context: .
+      dockerfile: services/notification_service/Dockerfile
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      bootstrap:
+        condition: service_completed_successfully
+    env_file:
+      - .env
+    ports:
+      - "8004:8004"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8004/api/v1/health')"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+
+  gateway:
+    build:
+      context: .
+      dockerfile: gateway/Dockerfile
+    depends_on:
+      auth_service:
+        condition: service_healthy
+      marketplace_service:
+        condition: service_healthy
+      operations_service:
+        condition: service_healthy
+      notification_service:
+        condition: service_healthy
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health')"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+
+  rider_web:
+    build:
+      context: ./frontend
+      dockerfile: rider_web/Dockerfile
+    depends_on:
+      gateway:
+        condition: service_healthy
+    environment:
+      VITE_API_BASE_URL: http://localhost:8000
+    ports:
+      - "3001:5173"
+
+  driver_web:
+    build:
+      context: ./frontend
+      dockerfile: driver_web/Dockerfile
+    depends_on:
+      gateway:
+        condition: service_healthy
+    environment:
+      VITE_API_BASE_URL: http://localhost:8000
+    ports:
+      - "3002:5173"
+
+  admin_panel:
+    build:
+      context: ./frontend
+      dockerfile: admin_panel/Dockerfile
+    depends_on:
+      gateway:
+        condition: service_healthy
+    environment:
+      VITE_API_BASE_URL: http://localhost:8000
+    ports:
+      - "3003:5173"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    depends_on:
+      gateway:
+        condition: service_healthy
+    environment:
+      VITE_API_BASE_URL: http://localhost:8000/api/v1
+    ports:
+      - "5173:5173"
+
+volumes:
+  postgres_data:
+  redis_data:
+  operations_media:

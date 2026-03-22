@@ -1,0 +1,80 @@
+.shell {
+  min-height: 100vh;
+  background: #ffffff;
+  color: var(--text-primary);
+  position: relative;
+}
+
+.body {
+  display: flex;
+  min-height: calc(100vh - 52px);
+  overflow: hidden;
+}
+
+.main {
+  flex: 1;
+  background: #ffffff;
+  overflow-y: auto;
+  padding: 16px;
+}
+
+.mobileSidebarOverlay {
+  position: fixed;
+  inset: 52px 0 0;
+  background: rgba(20, 26, 19, 0.32);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 29;
+}
+
+.mobileSidebarOverlayOpen {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobileSidebar {
+  position: fixed;
+  top: 52px;
+  left: 0;
+  bottom: 0;
+  width: min(320px, 84vw);
+  background: #ffffff;
+  transform: translateX(-100%);
+  transition: transform 0.22s ease;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.mobileSidebarOpen {
+  transform: translateX(0);
+}
+
+.mobileSidebarHeader {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  padding: 16px 20px 14px;
+  border-bottom: 1px solid #e5e7eb;
+  flex-shrink: 0;
+}
+
+.mobileSidebarTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: #141a13;
+}
+
+@media (min-width: 768px) {
+  .main {
+    padding: 24px;
+  }
+
+  .mobileSidebarOverlay,
+  .mobileSidebar {
+    display: none;
+  }
+}
