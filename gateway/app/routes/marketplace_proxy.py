@@ -18,6 +18,11 @@ async def proxy_riders(path: str, request: Request) -> Response:
     return await forward_request(request, settings.marketplace_service_url)
 
 
+@router.api_route("/api/v1/rider/{path:path}", methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"])
+async def proxy_rider(path: str, request: Request) -> Response:
+    return await forward_request(request, settings.marketplace_service_url)
+
+
 @router.api_route("/api/v1/drivers/{path:path}", methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"])
 async def proxy_drivers(path: str, request: Request) -> Response:
     return await forward_request(request, settings.marketplace_service_url)

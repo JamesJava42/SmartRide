@@ -1,0 +1,414 @@
+// RideConnect live database diagram
+// Source: current Postgres schema inspection on 2026-03-21
+// Format: DBML (https://dbml.dbdiagram.io/)
+//
+// Notes:
+// - "Ref:" lines represent foreign-key relationships found in the live DB.
+// - Some cross-service identity links are modeled as plain UUID columns without DB-level FKs.
+//   Those are documented below as "// Logical link" comments.
+
+Table auth_schema.users {
+  id uuid [pk]
+  email varchar
+  phone_number varchar
+  password_hash varchar [not null]
+  role user_role [not null]
+  is_active boolean [not null]
+  is_verified boolean [not null]
+  last_login_at timestamptz
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+}
+
+Table auth_schema.refresh_tokens {
+  id uuid [pk]
+  user_id uuid [not null]
+  token_hash varchar [not null]
+  expires_at timestamptz [not null]
+  revoked_at timestamptz
+  created_at timestamptz [not null]
+}
+
+Table auth_schema.password_reset_tokens {
+  id uuid [pk]
+  user_id uuid [not null]
+  token_hash varchar [not null]
+  expires_at timestamptz [not null]
+  used_at timestamptz
+  created_at timestamptz [not null]
+}
+
+Table marketplace_schema.drivers {
+  id uuid [pk]
+  user_id uuid [not null, unique]
+  first_name varchar [not null]
+  last_name varchar
+  phone_number varchar [not null]
+  region_id uuid
+  status driver_status [not null]
+  is_online boolean [not null]
+  is_available boolean [not null]
+  is_approved boolean [not null]
+  rating_avg numeric
+  total_rides_completed int [not null]
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+}
+
+Table marketplace_schema.vehicles {
+  id uuid [pk]
+  driver_id uuid [not null]
+  make varchar [not null]
+  model varchar [not null]
+  year int [not null]
+  color varchar
+  plate_number varchar [not null]
+  vehicle_type varchar [not null]
+  seat_capacity int [not null]
+  fuel_type varchar
+  mileage_city numeric
+  mileage_highway numeric
+  is_active boolean [not null]
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+}
+
+Table marketplace_schema.riders {
+  id uuid [pk]
+  user_id uuid [not null]
+  first_name varchar [not null]
+  last_name varchar
+  default_payment_method varchar
+  rating_avg numeric
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+}
+
+Table marketplace_schema.rider_saved_places {
+  id uuid [pk]
+  rider_id uuid [not null]
+  label varchar [not null]
+  address_line varchar [not null]
+  latitude numeric [not null]
+  longitude numeric [not null]
+  place_provider_id varchar
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+}
+
+Table marketplace_schema.pricing_rate_cards {
+  id uuid [pk]
+  region_id uuid [not null]
+  vehicle_type varchar [not null]
+  base_fare numeric [not null]
+  per_mile_rate numeric [not null]
+  per_minute_rate numeric [not null]
+  minimum_fare numeric [not null]
+  booking_fee numeric [not null]
+  platform_fee numeric [not null]
+  driver_payout_percent numeric
+  is_active boolean [not null]
+  effective_from timestamptz [not null]
+  effective_to timestamptz
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+}
+
+Table marketplace_schema.fare_estimates {
+  id uuid [pk]
+  ride_id uuid
+  vehicle_type varchar [not null]
+  region_id uuid
+  distance_miles numeric [not null]
+  duration_minutes int [not null]
+  base_fare numeric [not null]
+  distance_fare numeric [not null]
+  time_fare numeric [not null]
+  surge_multiplier numeric [not null]
+  booking_fee numeric [not null]
+  platform_fee numeric [not null]
+  total_estimated_fare numeric [not null]
+  driver_payout_estimate numeric
+  pricing_snapshot jsonb
+  created_at timestamptz [not null]
+}
+
+Table marketplace_schema.rides {
+  id uuid [pk]
+  rider_id uuid [not null]
+  driver_id uuid
+  vehicle_id uuid
+  region_id uuid
+  status ride_status [not null]
+  ride_type ride_type [not null]
+  pickup_address varchar [not null]
+  pickup_latitude numeric [not null]
+  pickup_longitude numeric [not null]
+  dropoff_address varchar [not null]
+  dropoff_latitude numeric [not null]
+  dropoff_longitude numeric [not null]
+  requested_at timestamptz [not null]
+  assigned_at timestamptz
+  driver_en_route_at timestamptz
+  driver_arrived_at timestamptz
+  started_at timestamptz
+  completed_at timestamptz
+  cancelled_at timestamptz
+  cancelled_by ride_cancelled_by
+  cancel_reason text
+  estimated_distance_miles numeric
+  estimated_duration_minutes int
+  actual_distance_miles numeric
+  actual_duration_minutes int
+  fare_estimate_id uuid
+  final_fare_amount numeric
+  driver_payout_amount numeric
+  dispatch_retry_count int [not null]
+  rider_rating smallint
+  rider_comment text
+  feedback_status feedback_status [not null]
+  completion_acknowledged boolean [not null]
+  payment_method varchar [not null]
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+}
+
+Table marketplace_schema.driver_offers {
+  id uuid [pk]
+  ride_id uuid [not null]
+  driver_id uuid [not null]
+  offer_status driver_offer_status [not null]
+  offered_at timestamptz [not null]
+  responded_at timestamptz
+  expires_at timestamptz [not null]
+  created_at timestamptz [not null]
+}
+
+Table marketplace_schema.driver_availability_logs {
+  id uuid [pk]
+  driver_id uuid [not null]
+  is_online boolean [not null]
+  is_available boolean [not null]
+  reason varchar
+  created_at timestamptz [not null]
+}
+
+Table marketplace_schema.ride_events {
+  id uuid [pk]
+  ride_id uuid [not null]
+  event_type varchar [not null]
+  event_payload jsonb
+  created_at timestamptz [not null]
+}
+
+Table marketplace_schema.ride_stops {
+  id uuid [pk]
+  ride_id uuid [not null]
+  stop_order int [not null]
+  address varchar [not null]
+  latitude numeric [not null]
+  longitude numeric [not null]
+  created_at timestamptz [not null]
+}
+
+Table marketplace_schema.tracking_pings {
+  id uuid [pk]
+  ride_id uuid
+  driver_id uuid [not null]
+  latitude numeric [not null]
+  longitude numeric [not null]
+  heading numeric
+  speed_mph numeric
+  accuracy_meters numeric
+  recorded_at timestamptz [not null]
+}
+
+Table marketplace_schema.idempotency_keys {
+  id uuid [pk]
+  actor_user_id varchar [not null]
+  action_scope varchar [not null]
+  idempotency_key varchar [not null]
+  request_hash varchar [not null]
+  response_json jsonb
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+}
+
+Table operations_schema.regions {
+  id uuid [pk]
+  code varchar [not null]
+  name varchar [not null]
+  city varchar
+  state varchar
+  country varchar [not null]
+  is_active boolean [not null]
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+}
+
+Table operations_schema.admins {
+  id uuid [pk]
+  user_id uuid [not null]
+  display_name varchar [not null]
+  admin_role admin_role [not null]
+  is_active boolean [not null]
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+}
+
+Table operations_schema.admin_regions {
+  id uuid [pk]
+  admin_id uuid [not null]
+  region_id uuid [not null]
+  created_at timestamptz [not null]
+}
+
+Table operations_schema.admin_audit_logs {
+  id uuid [pk]
+  admin_id uuid
+  action_type varchar [not null]
+  entity_type varchar [not null]
+  entity_id uuid
+  details_json json
+  created_at timestamptz [not null]
+}
+
+Table operations_schema.admin_alerts {
+  id uuid [pk]
+  region_id uuid
+  alert_type varchar [not null]
+  severity alert_severity [not null]
+  title varchar [not null]
+  message text [not null]
+  is_resolved boolean [not null]
+  resolved_by_admin_id uuid
+  resolved_at timestamptz
+  created_at timestamptz [not null]
+}
+
+Table operations_schema.document_requirements {
+  id uuid [pk]
+  entity_type varchar [not null]
+  document_type driver_document_type [not null]
+  region_id uuid
+  is_required boolean [not null]
+  requires_expiry boolean [not null]
+  requires_document_number boolean [not null]
+  requires_issued_at boolean [not null]
+  requires_issuing_state boolean [not null]
+  requires_issuing_country boolean [not null]
+  allowed_extensions_json json
+  max_file_size_bytes bigint
+  validation_rules_json json
+  is_active boolean [not null]
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+}
+
+Table operations_schema.driver_onboarding_profiles {
+  id uuid [pk]
+  driver_id uuid [not null, unique]
+  region_id uuid [not null]
+  status onboarding_status [not null]
+  submitted_at timestamptz
+  review_started_at timestamptz
+  reviewed_at timestamptz
+  reviewed_by_admin_id uuid
+  review_notes text
+  rejection_reason text
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+}
+
+Table operations_schema.driver_documents {
+  id uuid [pk]
+  driver_id uuid [not null]
+  document_type driver_document_type [not null]
+  file_url text
+  verification_status document_verification_status [not null]
+  submitted_at timestamptz [not null]
+  reviewed_at timestamptz
+  reviewed_by_admin_id uuid
+  rejection_reason text
+  metadata_json json
+  file_path text
+  original_file_name text
+  mime_type text
+  file_size bigint
+  notes text
+  document_number varchar
+  issuing_state varchar
+  issuing_country varchar
+  issued_at timestamptz
+  expires_at timestamptz
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+}
+
+Table notification_schema.notification_jobs {
+  id uuid [pk]
+  event_type varchar [not null]
+  recipient_type varchar [not null]
+  recipient_id uuid [not null]
+  channel varchar [not null]
+  subject varchar
+  body_template varchar
+  payload_json jsonb
+  status varchar [not null]
+  scheduled_for timestamptz
+  sent_at timestamptz
+  failed_at timestamptz
+  failure_reason text
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+}
+
+Table notification_schema.notification_delivery_logs {
+  id uuid [pk]
+  notification_job_id uuid [not null]
+  provider varchar
+  provider_message_id varchar
+  delivery_status varchar [not null]
+  delivery_payload jsonb
+  created_at timestamptz [not null]
+}
+
+Ref: auth_schema.refresh_tokens.user_id > auth_schema.users.id
+Ref: auth_schema.password_reset_tokens.user_id > auth_schema.users.id
+
+Ref: marketplace_schema.drivers.user_id > auth_schema.users.id
+Ref: marketplace_schema.vehicles.driver_id > marketplace_schema.drivers.id
+Ref: marketplace_schema.rider_saved_places.rider_id > marketplace_schema.riders.id
+Ref: marketplace_schema.rides.rider_id > marketplace_schema.riders.id
+Ref: marketplace_schema.rides.driver_id > marketplace_schema.drivers.id
+Ref: marketplace_schema.rides.vehicle_id > marketplace_schema.vehicles.id
+Ref: marketplace_schema.rides.fare_estimate_id > marketplace_schema.fare_estimates.id
+Ref: marketplace_schema.driver_offers.ride_id > marketplace_schema.rides.id
+Ref: marketplace_schema.driver_offers.driver_id > marketplace_schema.drivers.id
+Ref: marketplace_schema.driver_availability_logs.driver_id > marketplace_schema.drivers.id
+Ref: marketplace_schema.ride_events.ride_id > marketplace_schema.rides.id
+Ref: marketplace_schema.ride_stops.ride_id > marketplace_schema.rides.id
+Ref: marketplace_schema.tracking_pings.ride_id > marketplace_schema.rides.id
+Ref: marketplace_schema.tracking_pings.driver_id > marketplace_schema.drivers.id
+
+Ref: operations_schema.admin_regions.admin_id > operations_schema.admins.id
+Ref: operations_schema.admin_regions.region_id > operations_schema.regions.id
+Ref: operations_schema.admin_audit_logs.admin_id > operations_schema.admins.id
+Ref: operations_schema.admin_alerts.region_id > operations_schema.regions.id
+Ref: operations_schema.admin_alerts.resolved_by_admin_id > operations_schema.admins.id
+Ref: operations_schema.document_requirements.region_id > operations_schema.regions.id
+Ref: operations_schema.driver_documents.reviewed_by_admin_id > operations_schema.admins.id
+Ref: operations_schema.driver_onboarding_profiles.region_id > operations_schema.regions.id
+Ref: operations_schema.driver_onboarding_profiles.reviewed_by_admin_id > operations_schema.admins.id
+
+Ref: notification_schema.notification_delivery_logs.notification_job_id > notification_schema.notification_jobs.id
+
+// Logical links used by the application, but not enforced by DB-level FK in the live schema:
+// marketplace_schema.riders.user_id -> auth_schema.users.id
+// operations_schema.admins.user_id -> auth_schema.users.id
+// operations_schema.driver_onboarding_profiles.driver_id -> marketplace_schema.drivers.id
+// operations_schema.driver_documents.driver_id -> marketplace_schema.drivers.id
+// marketplace_schema.pricing_rate_cards.region_id -> operations_schema.regions.id
+// marketplace_schema.fare_estimates.region_id -> operations_schema.regions.id
+// marketplace_schema.drivers.region_id -> operations_schema.regions.id
+// marketplace_schema.rides.region_id -> operations_schema.regions.id

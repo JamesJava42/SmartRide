@@ -57,16 +57,21 @@ export function clearAuthToken() {
 }
 
 export async function request<T>(path: string, init?: RequestInit): Promise<T> {
-  const headers = {
-    "Content-Type": "application/json",
-    ...(authToken ? { Authorization: `Bearer ${authToken}` } : {}),
-    ...(isNgrokUrl(getBaseUrl()) ? { "ngrok-skip-browser-warning": "true" } : {}),
-    ...(init?.headers ?? {}),
-  };
+  const headers = new Headers(init?.headers);
+
+  if (!headers.has("Content-Type")) {
+    headers.set("Content-Type", "application/json");
+  }
+  if (authToken) {
+    headers.set("Authorization", `Bearer ${authToken}`);
+  }
+  if (isNgrokUrl(getBaseUrl())) {
+    headers.set("ngrok-skip-browser-warning", "true");
+  }
 
   const response = await fetch(`${API_BASE_URL}${path}`, {
-    headers,
     ...init,
+    headers,
   });
 
   const responseText = await response.text();
