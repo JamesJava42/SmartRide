@@ -187,9 +187,8 @@ services:
   - type: web
     name: rider-web
     runtime: static
-    buildCommand: cd frontend/rider_web && npm ci && npm run build
+    buildCommand: cd frontend/rider_web && npm install && npm run build
     staticPublishPath: frontend/rider_web/dist
-    plan: free
     routes:
       - type: rewrite
         source: /*
@@ -204,9 +203,8 @@ services:
   - type: web
     name: driver-web
     runtime: static
-    buildCommand: cd frontend/driver_web && npm ci && npm run build
+    buildCommand: cd frontend/driver_web && npm install && npm run build
     staticPublishPath: frontend/driver_web/dist
-    plan: free
     routes:
       - type: rewrite
         source: /*
@@ -221,9 +219,8 @@ services:
   - type: web
     name: admin-panel
     runtime: static
-    buildCommand: cd frontend/admin_panel && npm ci && npm run build
+    buildCommand: cd frontend/admin_panel && npm install && npm run build
     staticPublishPath: frontend/admin_panel/dist
-    plan: free
     routes:
       - type: rewrite
         source: /*
