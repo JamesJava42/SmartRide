@@ -4,6 +4,9 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 def _ensure_scheme(url: str) -> str:
     if url and not url.startswith("http://") and not url.startswith("https://"):
+        # Render internal hostname (no dots) — reachable at http://<name>:10000
+        if "." not in url:
+            return f"http://{url}:10000"
         return "https://" + url
     return url
 
