@@ -19,4 +19,4 @@ COPY shared /app/shared
 
 WORKDIR /app/services/operations_service
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8003"]
+CMD sh -c "alembic upgrade head && exec uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8003}"
