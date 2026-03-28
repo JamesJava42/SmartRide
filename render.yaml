@@ -17,6 +17,7 @@ services:
     runtime: docker
     dockerfilePath: services/auth_service/Dockerfile
     dockerContext: .
+    dockerCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
     plan: free
     healthCheckPath: /api/v1/health
     envVars:
@@ -50,6 +51,7 @@ services:
     runtime: docker
     dockerfilePath: services/marketplace_service/Dockerfile
     dockerContext: .
+    dockerCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
     plan: free
     healthCheckPath: /api/v1/health
     envVars:
@@ -88,6 +90,7 @@ services:
     runtime: docker
     dockerfilePath: services/operations_service/Dockerfile
     dockerContext: .
+    dockerCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
     plan: free
     healthCheckPath: /api/v1/health
     envVars:
@@ -126,6 +129,7 @@ services:
     runtime: docker
     dockerfilePath: services/notification_service/Dockerfile
     dockerContext: .
+    dockerCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
     plan: free
     healthCheckPath: /api/v1/health
     envVars:
@@ -157,6 +161,7 @@ services:
     runtime: docker
     dockerfilePath: gateway/Dockerfile
     dockerContext: .
+    dockerCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
     plan: free
     healthCheckPath: /health
     envVars:

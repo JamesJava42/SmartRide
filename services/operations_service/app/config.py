@@ -1,4 +1,4 @@
-from pydantic import Field, model_validator
+from pydantic import Field, field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 from shared.python.utils.jwt_settings import (
@@ -24,6 +24,16 @@ class Settings(BaseSettings):
     internal_service_token: str = Field(default="rideconnect-internal-dev-token", validation_alias="INTERNAL_SERVICE_TOKEN")
     media_root: str = Field(default="/app/media", validation_alias="MEDIA_ROOT")
     document_max_size_bytes: int = Field(default=10 * 1024 * 1024, validation_alias="DOCUMENT_MAX_SIZE_BYTES")
+
+    @field_validator("database_url", mode="before")
+    @classmethod
+    def normalize_db_url(cls, v: str) -> str:
+        if isinstance(v, str):
+            if v.startswith("postgres://"):
+                return "postgresql+asyncpg://" + v[len("postgres://"):]
+            if v.startswith("postgresql://"):
+                return "postgresql+asyncpg://" + v[len("postgresql://"):]
+        return v
 
     @model_validator(mode="after")
     def validate_jwt_settings(self) -> "Settings":
