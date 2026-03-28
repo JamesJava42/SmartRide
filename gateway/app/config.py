@@ -1,5 +1,11 @@
-from pydantic import Field
+from pydantic import Field, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+
+def _ensure_scheme(url: str) -> str:
+    if url and not url.startswith("http://") and not url.startswith("https://"):
+        return "https://" + url
+    return url
 
 
 class Settings(BaseSettings):
@@ -12,6 +18,11 @@ class Settings(BaseSettings):
     redis_url: str = Field(default="redis://redis:6379/0", validation_alias="REDIS_URL")
     driver_register_rate_limit: int = Field(default=5, validation_alias="DRIVER_REGISTER_RATE_LIMIT")
     driver_register_rate_window_seconds: int = Field(default=900, validation_alias="DRIVER_REGISTER_RATE_WINDOW_SECONDS")
+
+    @field_validator("auth_service_url", "marketplace_service_url", "operations_service_url", "notification_service_url", mode="before")
+    @classmethod
+    def ensure_scheme(cls, v: str) -> str:
+        return _ensure_scheme(v)
 
 
 settings = Settings()
