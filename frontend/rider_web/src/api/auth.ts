@@ -161,6 +161,11 @@ export const authApi = {
     }
   },
 
+  signInWithGoogle: async (idToken: string) =>
+    normalizeAuthResponse(
+      await authRequest<any>("/google", { id_token: idToken, role: "RIDER" }),
+    ),
+
   bootstrapRider: () => request<any>("/riders/me/bootstrap", { method: "POST" }),
 
   updateMe: async (payload: Record<string, unknown>) => {

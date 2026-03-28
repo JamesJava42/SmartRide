@@ -21,7 +21,10 @@ def _uuid(value: str) -> UUID:
 
 class DispatchService:
     offer_timeout_seconds = 90
-    max_dispatch_retries = 1
+
+    @property
+    def max_dispatch_retries(self) -> int:
+        return settings.max_dispatch_retries
 
     async def _eligible_drivers(self, db: AsyncSession, ride: Ride) -> list[Driver]:
         drivers = (

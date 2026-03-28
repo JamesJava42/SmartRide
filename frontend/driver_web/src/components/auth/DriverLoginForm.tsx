@@ -1,8 +1,9 @@
 import { useState, type KeyboardEvent } from "react";
+import { GoogleLogin } from "@react-oauth/google";
 import { AlertCircle, ArrowRight, Eye, EyeOff } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-import { loginDriver } from "../../api/driverAuth";
+import { loginDriver, loginDriverWithGoogle } from "../../api/driverAuth";
 import { getDriverProfile } from "../../api/driverDashboard";
 import { useDriverAuth } from "../../hooks/useDriverAuth";
 import { setAccessToken, setStoredUser } from "../../utils/authStorage";
@@ -174,6 +175,44 @@ export function DriverLoginForm({ onSwitchToRegister }: DriverLoginFormProps) {
           <span className={formStyles.divText}>or</span>
           <span className={formStyles.divLine} />
         </div>
+
+        <GoogleLogin
+          onSuccess={async (credentialResponse) => {
+            if (!credentialResponse.credential) return;
+            setIsLoading(true);
+            setApiError(null);
+            try {
+              const response = await loginDriverWithGoogle(credentialResponse.credential);
+              auth.login({
+                accessToken: response.access_token,
+                user: {
+                  userId: response.driver_id,
+                  fullName: response.full_name,
+                  email: response.email,
+                  role: "DRIVER",
+                },
+              });
+              setAccessToken(response.access_token);
+              setStoredUser({
+                userId: response.driver_id,
+                fullName: response.full_name,
+                email: response.email,
+                role: "DRIVER",
+              });
+              const profile = await getDriverProfile();
+              navigate(profile.is_approved ? "/dashboard" : "/onboarding-pending", { replace: true });
+            } catch {
+              setApiError("Google sign-in failed. Please try again.");
+            } finally {
+              setIsLoading(false);
+            }
+          }}
+          onError={() => setApiError("Google sign-in failed. Please try again.")}
+          width="100%"
+          text="signin_with"
+          shape="rectangular"
+          theme="outline"
+        />
 
         <div className={formStyles.switchLink}>
           Don&apos;t have an account?{" "}

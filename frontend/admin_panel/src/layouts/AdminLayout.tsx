@@ -10,6 +10,7 @@ import {
   OnboardingIcon,
   RegionsIcon,
 } from '@shared/constants/icons';
+import { useUnmatchedRidesReport } from '../hooks/useUnmatchedRidesReport';
 import styles from './AdminLayout.module.css';
 
 const NAV_ITEMS = [
@@ -50,6 +51,8 @@ export function AdminLayout() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const admin = getAdminFromToken();
+  const { data: unmatchedReport } = useUnmatchedRidesReport();
+  const unmatchedCount = unmatchedReport?.total_unmatched_rides ?? 0;
 
   useEffect(() => {
     function handleClick(e: MouseEvent) {
@@ -80,10 +83,14 @@ export function AdminLayout() {
     >
       {({ isActive }: { isActive: boolean }) => {
         const Icon = item.icon;
+        const showBadge = item.to === '/live-rides' && unmatchedCount > 0;
         return (
           <>
             <Icon size={16} color={isActive ? 'var(--green-700)' : 'var(--text-muted)'} />
             <span>{item.label}</span>
+            {showBadge && (
+              <span className={styles.navBadge}>{unmatchedCount > 9 ? '9+' : unmatchedCount}</span>
+            )}
           </>
         );
       }}

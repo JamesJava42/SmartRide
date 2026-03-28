@@ -327,9 +327,13 @@ class OnboardingService:
                 timeout=10.0,
             )
 
-        if resp.status_code in (400, 409):
+        if resp.status_code == 409:
             body = resp.json()
             detail = body.get("message") or body.get("detail") or "Email or phone already in use"
+            raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=detail)
+        if resp.status_code == 400:
+            body = resp.json()
+            detail = body.get("message") or body.get("detail") or "Invalid registration data"
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=detail)
         if resp.status_code != 200:
             raise HTTPException(

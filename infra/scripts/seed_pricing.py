@@ -18,10 +18,14 @@ async def main() -> None:
         region_id = await conn.scalar(text("SELECT id FROM operations_schema.regions WHERE code = 'long_beach_ca' LIMIT 1"))
         if not region_id:
             raise RuntimeError("Long Beach region not found. Run seed_region.py first.")
+        # Rates are set 25% below Uber minimums for Long Beach, CA:
+        # Uber approx (UberX): base $1.25, $1.15/mi, $0.26/min, min $7.50 → 25% off
+        # Columns: vehicle_type, base_fare, per_mile_rate, per_minute_rate,
+        #          minimum_fare, booking_fee, platform_fee, driver_payout_percent
         for row in [
-            ("ECONOMY", 3.50, 0.85, 0.22, 8.00, 0.00, 1.50, 80.00),
-            ("PREMIUM", 6.00, 1.35, 0.35, 12.00, 0.00, 2.00, 82.00),
-            ("XL", 7.50, 1.65, 0.40, 14.00, 0.00, 2.50, 84.00),
+            ("ECONOMY", 1.00, 0.85, 0.20, 5.50, 0.00, 1.50, 80.00),
+            ("PREMIUM", 1.50, 1.30, 0.26, 7.50, 0.00, 2.00, 82.00),
+            ("XL",      1.75, 1.50, 0.30, 9.75, 0.00, 2.25, 84.00),
         ]:
             existing = await conn.scalar(
                 text(

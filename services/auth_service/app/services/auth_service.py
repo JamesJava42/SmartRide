@@ -1,13 +1,17 @@
 from __future__ import annotations
 
+import secrets
 from datetime import datetime, timezone
 
 from fastapi import HTTPException, status
+from google.oauth2 import id_token as google_id_token
+from google.auth.transport import requests as google_requests
 from sqlalchemy import or_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.config import settings
 from app.models import RefreshToken, User
-from app.schemas.auth import AuthTokensResponse, AuthUserResponse, LoginRequest, SignUpRequest
+from app.schemas.auth import AuthTokensResponse, AuthUserResponse, GoogleLoginRequest, LoginRequest, SignUpRequest
 from app.schemas.user import CurrentUserResponse
 from app.services.alert_reporter import report_auth_failure
 from app.services.password_service import password_service
@@ -20,15 +24,14 @@ class AuthService:
         if payload.role == UserRole.ADMIN:
             raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Admin accounts cannot be created via signup")
 
-        conditions = []
         if payload.email:
-            conditions.append(User.email == payload.email)
+            existing_email = await db.scalar(select(User).where(User.email == payload.email))
+            if existing_email:
+                raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Email already registered")
         if payload.phone_number:
-            conditions.append(User.phone_number == payload.phone_number)
-
-        existing = await db.scalar(select(User).where(or_(*conditions)))
-        if existing:
-            raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Account already exists")
+            existing_phone = await db.scalar(select(User).where(User.phone_number == payload.phone_number))
+            if existing_phone:
+                raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Phone number already registered")
 
         user = User(
             email=payload.email,
@@ -110,6 +113,60 @@ class AuthService:
         return AuthTokensResponse(
             access_token=access_token,
             refresh_token=new_refresh_token,
+            user=self._serialize_user(user),
+        )
+
+    async def google_login(self, db: AsyncSession, payload: GoogleLoginRequest) -> AuthTokensResponse:
+        if not settings.google_client_id:
+            raise HTTPException(status_code=status.HTTP_503_SERVICE_UNAVAILABLE, detail="Google OAuth not configured")
+
+        try:
+            id_info = google_id_token.verify_oauth2_token(
+                payload.id_token,
+                google_requests.Request(),
+                settings.google_client_id,
+            )
+        except ValueError:
+            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid Google token")
+
+        email: str = id_info.get("email", "")
+        if not email:
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Google account has no email")
+
+        user = await db.scalar(select(User).where(User.email == email))
+        if not user:
+            if payload.role == UserRole.ADMIN:
+                raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Admin accounts cannot be created via Google OAuth")
+            user = User(
+                email=email,
+                password_hash=f"GOOGLE_OAUTH_{secrets.token_hex(32)}",
+                role=payload.role,
+                is_verified=True,
+            )
+            db.add(user)
+            await db.commit()
+            await db.refresh(user)
+
+        if not user.is_active:
+            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Account is inactive")
+
+        access_token = token_service.generate_access_token(user.id, user.role)
+        refresh_token, refresh_expires_at = token_service.generate_refresh_token(user.id, user.role)
+        db.add(
+            RefreshToken(
+                user_id=user.id,
+                token_hash=token_service.hash_token(refresh_token),
+                expires_at=refresh_expires_at,
+                created_at=datetime.now(timezone.utc),
+            )
+        )
+        user.last_login_at = datetime.now(timezone.utc)
+        db.add(user)
+        await db.commit()
+
+        return AuthTokensResponse(
+            access_token=access_token,
+            refresh_token=refresh_token,
             user=self._serialize_user(user),
         )
 

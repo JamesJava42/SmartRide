@@ -114,6 +114,46 @@ export async function registerDriver(payload: DriverRegisterPayload): Promise<Dr
   };
 }
 
+export async function loginDriverWithGoogle(idToken: string): Promise<DriverLoginResponse> {
+  const response = await fetch(`${getBaseUrl()}/api/v1/auth/google`, {
+    method: "POST",
+    headers: buildAuthHeaders(),
+    body: JSON.stringify({ id_token: idToken, role: "DRIVER" }),
+  });
+
+  const auth = await handleJsonResponse<{
+    access_token: string;
+    token_type: string;
+    user?: { user_id?: string; role?: string };
+  }>(response);
+
+  const token = auth.access_token;
+  let driverId = auth.user?.user_id ?? "";
+  let fullName = "";
+  let email = "";
+
+  try {
+    const profileResponse = await fetch(`${getBaseUrl()}/api/v1/drivers/me`, {
+      method: "GET",
+      headers: buildAuthHeaders(token),
+    });
+    const profile = await handleJsonResponse<Record<string, unknown>>(profileResponse);
+    driverId = String(profile.driver_id ?? profile.driverId ?? auth.user?.user_id ?? "");
+    fullName = typeof profile.full_name === "string" ? profile.full_name : "";
+    email = typeof profile.email === "string" ? profile.email : "";
+  } catch {
+    driverId = auth.user?.user_id ?? "";
+  }
+
+  return {
+    access_token: token,
+    token_type: auth.token_type ?? "bearer",
+    driver_id: driverId,
+    full_name: fullName,
+    email,
+  };
+}
+
 export async function getDriverRegistrationRegions(): Promise<RegistrationRegion[]> {
   const response = await fetch(`${getBaseUrl()}/api/v1/onboarding/regions`, {
     method: "GET",

@@ -56,3 +56,18 @@
   border-radius: var(--radius-sm);
   font-size: 13px;
 }
+
+@media (max-width: 480px) {
+  .root {
+    align-items: flex-start;
+    padding: 24px 0 0;
+  }
+
+  .card {
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 28px 20px 32px;
+    min-height: 100vh;
+  }
+}

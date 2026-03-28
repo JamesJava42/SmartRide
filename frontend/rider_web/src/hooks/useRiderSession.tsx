@@ -27,6 +27,7 @@ type SessionContextValue = {
   user: AuthUser | null;
   isSignedIn: boolean;
   signIn: (payload: { email: string; password: string }) => Promise<void>;
+  signInWithGoogle: (idToken: string) => Promise<void>;
   signUp: (payload: { full_name: string; email: string; phone_number: string; password: string }) => Promise<void>;
   signOut: () => void;
 };
@@ -74,6 +75,14 @@ export function RiderSessionProvider({ children }: { children: ReactNode }) {
     persistSession({ ...auth, user: hydratedUser });
   }
 
+  async function signInWithGoogle(idToken: string) {
+    const auth = await authApi.signInWithGoogle(idToken);
+    setAuthToken(auth.access_token);
+    await authApi.bootstrapRider().catch(() => {});
+    const hydratedUser = await authApi.getMe().catch(() => auth.user);
+    persistSession({ ...auth, user: hydratedUser });
+  }
+
   async function signUp(payload: { full_name: string; email: string; phone_number: string; password: string }) {
     await authApi.signUp(payload);
     await signIn({
@@ -103,10 +112,11 @@ export function RiderSessionProvider({ children }: { children: ReactNode }) {
       user,
       isSignedIn: Boolean(token && user),
       signIn,
+      signInWithGoogle,
       signUp,
       signOut,
     }),
-    [isLoading, token, user, signIn, signUp],
+    [isLoading, token, user, signIn, signInWithGoogle, signUp],
   );
 
   return <SessionContext.Provider value={value}>{children}</SessionContext.Provider>;

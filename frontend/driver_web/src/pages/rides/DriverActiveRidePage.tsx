@@ -118,6 +118,14 @@ export default function DriverActiveRidePage() {
     },
   });
 
+  function openNavigation(lat: number, lng: number) {
+    const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+    const url = isIOS
+      ? `maps://maps.apple.com/?daddr=${lat},${lng}&dirflg=d`
+      : `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}&travelmode=driving`;
+    window.open(url, "_blank");
+  }
+
   const ride = rideQuery.data;
   const eta = ride ? getEtaLabel(ride) : null;
   const panelTitle = ride ? getStageBadge(ride.stage) : "On ride";
@@ -257,19 +265,24 @@ export default function DriverActiveRidePage() {
                     <button
                       type="button"
                       className={styles.primaryButton}
-                      onClick={() =>
+                      onClick={() => {
+                        openNavigation(ride.pickup_latitude, ride.pickup_longitude);
                         setDialog({
                           title: "Head to pickup",
                           message: "Confirm you are starting the drive to the pickup location.",
                           action: "enRoute",
-                        })
-                      }
+                        });
+                      }}
                     >
                       Navigate to pickup
                     </button>
                   ) : (
                     <>
-                      <button type="button" className={styles.primaryButton}>
+                      <button
+                        type="button"
+                        className={styles.primaryButton}
+                        onClick={() => openNavigation(ride.pickup_latitude, ride.pickup_longitude)}
+                      >
                         Navigate to pickup
                       </button>
                       <button
@@ -307,19 +320,28 @@ export default function DriverActiveRidePage() {
               )}
 
               {ride.stage === "RIDE_STARTED" && (
-                <button
-                  type="button"
-                  className={styles.primaryButton}
-                  onClick={() =>
-                    setDialog({
-                      title: "Complete ride",
-                      message: "Confirm you've reached the dropoff location.",
-                      action: "complete",
-                    })
-                  }
-                >
-                  Complete ride
-                </button>
+                <>
+                  <button
+                    type="button"
+                    className={styles.secondaryButton}
+                    onClick={() => openNavigation(ride.dropoff_latitude, ride.dropoff_longitude)}
+                  >
+                    Navigate to dropoff
+                  </button>
+                  <button
+                    type="button"
+                    className={styles.primaryButton}
+                    onClick={() =>
+                      setDialog({
+                        title: "Complete ride",
+                        message: "Confirm you've reached the dropoff location.",
+                        action: "complete",
+                      })
+                    }
+                  >
+                    Complete ride
+                  </button>
+                </>
               )}
 
               {ride.stage !== "RIDE_STARTED" && ride.stage !== "RIDE_COMPLETED" ? (

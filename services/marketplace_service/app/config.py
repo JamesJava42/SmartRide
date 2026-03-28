@@ -19,7 +19,7 @@ class Settings(BaseSettings):
     operations_service_url: str = Field(default="http://operations_service:8004", validation_alias="OPERATIONS_SERVICE_URL")
     notification_service_url: str = Field(default="http://notification_service:8003", validation_alias="NOTIFICATION_SERVICE_URL")
     internal_service_token: str = Field(default="dev-internal-token", validation_alias="INTERNAL_SERVICE_TOKEN")
-    max_dispatch_retries: int = Field(default=1, validation_alias="MAX_DISPATCH_RETRIES")
+    max_dispatch_retries: int = Field(default=5, validation_alias="MAX_DISPATCH_RETRIES")
     jwt_secret_key: str = Field(default=DEFAULT_JWT_SECRET, validation_alias="JWT_SECRET_KEY")
     jwt_algorithm: str = Field(default="HS256", validation_alias="JWT_ALGORITHM")
     jwt_issuer: str = Field(default=DEFAULT_JWT_ISSUER, validation_alias="JWT_ISSUER")

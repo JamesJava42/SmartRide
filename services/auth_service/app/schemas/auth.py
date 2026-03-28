@@ -49,6 +49,11 @@ class AuthTokensResponse(BaseModel):
     user: AuthUserResponse
 
 
+class GoogleLoginRequest(BaseModel):
+    id_token: str
+    role: UserRole = UserRole.RIDER
+
+
 class RefreshTokenRecord(BaseModel):
     user_id: str
     token_hash: str

@@ -248,8 +248,5 @@ export function getApprovalReadiness(data: DriverReviewData): {
       reason: 'Some submitted documents still need review.',
     };
   }
-  if (!data.vehicle) {
-    return { canApprove: false, reason: 'No active vehicle is attached to this application.' };
-  }
   return { canApprove: true, reason: null };
 }

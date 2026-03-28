@@ -103,7 +103,7 @@ class RideHistoryResponse(BaseModel):
 
 
 class CancelRideRequest(BaseModel):
-    cancel_reason: str = Field(min_length=1)
+    cancel_reason: str | None = None
 
 
 class RideCancelledResponse(BaseModel):

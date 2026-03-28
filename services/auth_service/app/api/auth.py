@@ -8,7 +8,7 @@ from app.config import settings
 from app.core.deps import get_current_user
 from app.db.session import get_db_session
 from app.models.user import User
-from app.schemas.auth import LoginRequest, RefreshRequest, SignUpRequest, TokenPayload
+from app.schemas.auth import GoogleLoginRequest, LoginRequest, RefreshRequest, SignUpRequest, TokenPayload
 from app.services.auth_service import auth_service
 from shared.python.schemas.responses import SuccessResponse
 
@@ -37,6 +37,12 @@ async def refresh(payload: RefreshRequest, db: AsyncSession = Depends(get_db_ses
 async def me(current_user: TokenPayload = Depends(get_current_user), db: AsyncSession = Depends(get_db_session)) -> SuccessResponse:
     user = await auth_service.get_current_user(db, current_user.user_id)
     return SuccessResponse(data=user.model_dump(mode="json"))
+
+
+@router.post("/google", response_model=SuccessResponse)
+async def google_login(payload: GoogleLoginRequest, db: AsyncSession = Depends(get_db_session)) -> SuccessResponse:
+    auth = await auth_service.google_login(db, payload)
+    return SuccessResponse(message="Login successful", data=auth.model_dump(mode="json"))
 
 
 @router.delete("/users/{user_id}", response_model=SuccessResponse)

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from fastapi import APIRouter, Depends, Header
+from fastapi import APIRouter, Body, Depends, Header
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.enums import RideStatus
@@ -71,9 +71,9 @@ async def list_rider_ride_history(
 @router.post("/api/v1/rides/{ride_id}/cancel", response_model=SuccessResponse)
 async def cancel_ride(
     ride_id: str,
-    payload: CancelRideRequest,
     db: AsyncSession = Depends(get_db_session),
     user=Depends(get_current_user),
+    payload: CancelRideRequest = Body(default_factory=CancelRideRequest),
 ):
     return SuccessResponse(message="Ride cancelled", data=await ride_service.cancel_ride(db, ride_id, user.user_id, user.role, payload))
 

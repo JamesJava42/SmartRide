@@ -21,6 +21,7 @@ class Settings(BaseSettings):
     jwt_algorithm: str = Field(default="HS256", validation_alias="JWT_ALGORITHM")
     jwt_issuer: str = Field(default=DEFAULT_JWT_ISSUER, validation_alias="JWT_ISSUER")
     internal_service_token: str = Field(default="rideconnect-internal-dev-token", validation_alias="INTERNAL_SERVICE_TOKEN")
+    google_client_id: str = Field(default="", validation_alias="GOOGLE_CLIENT_ID")
     jwt_access_token_expire_minutes: int = Field(default=15, validation_alias="JWT_ACCESS_TOKEN_EXPIRE_MINUTES")
     jwt_refresh_token_expire_days: int = Field(default=7, validation_alias="JWT_REFRESH_TOKEN_EXPIRE_DAYS")
 
