@@ -12,6 +12,7 @@ export default defineConfig({
     alias: {
       "@shared": fs.existsSync(localSharedPath) ? localSharedPath : containerSharedPath,
     },
+    dedupe: ["react", "react-dom", "react-router-dom", "lucide-react"],
   },
   server: {
     host: "0.0.0.0",
