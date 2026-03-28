@@ -10,8 +10,16 @@ from sqlalchemy.ext.asyncio import async_engine_from_config
 from app.db.base import Base
 import app.models  # noqa: F401
 
+def _normalize_db_url(url: str) -> str:
+    if url.startswith("postgres://"):
+        return "postgresql+asyncpg://" + url[len("postgres://"):]
+    if url.startswith("postgresql://"):
+        return "postgresql+asyncpg://" + url[len("postgresql://"):]
+    return url
+
+
 config = context.config
-config.set_main_option("sqlalchemy.url", os.getenv("AUTH_DATABASE_URL", "postgresql+asyncpg://rideconnect:changeme@postgres:5432/rideconnect"))
+config.set_main_option("sqlalchemy.url", _normalize_db_url(os.getenv("AUTH_DATABASE_URL", "postgresql+asyncpg://rideconnect:changeme@postgres:5432/rideconnect")))
 
 if config.config_file_name is not None and config.file_config.has_section("formatters"):
     fileConfig(config.config_file_name)
