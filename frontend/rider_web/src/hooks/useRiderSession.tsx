@@ -90,9 +90,10 @@ export function RiderSessionProvider({ children }: { children: ReactNode }) {
       password: payload.password,
     });
     if (payload.full_name.trim()) {
-      const updatedUser = await authApi.updateMe({ full_name: payload.full_name });
-      setUser(updatedUser);
-      window.localStorage.setItem(USER_KEY, JSON.stringify(updatedUser));
+      await authApi.updateMe({ full_name: payload.full_name }).then((updatedUser) => {
+        setUser(updatedUser);
+        window.localStorage.setItem(USER_KEY, JSON.stringify(updatedUser));
+      }).catch(() => {});
     }
   }
 
