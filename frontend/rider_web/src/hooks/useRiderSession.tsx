@@ -70,7 +70,7 @@ export function RiderSessionProvider({ children }: { children: ReactNode }) {
   async function signIn(payload: { email: string; password: string }) {
     const auth = await authApi.signIn(payload);
     setAuthToken(auth.access_token);
-    await authApi.bootstrapRider();
+    await authApi.bootstrapRider().catch(() => {});
     const hydratedUser = await authApi.getMe().catch(() => auth.user);
     persistSession({ ...auth, user: hydratedUser });
   }
