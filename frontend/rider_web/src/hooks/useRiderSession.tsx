@@ -85,15 +85,22 @@ export function RiderSessionProvider({ children }: { children: ReactNode }) {
 
   async function signUp(payload: { full_name: string; email: string; phone_number: string; password: string }) {
     await authApi.signUp(payload);
-    await signIn({
-      email: payload.email || payload.phone_number,
-      password: payload.password,
-    });
-    if (payload.full_name.trim()) {
-      await authApi.updateMe({ full_name: payload.full_name }).then((updatedUser) => {
-        setUser(updatedUser);
-        window.localStorage.setItem(USER_KEY, JSON.stringify(updatedUser));
-      }).catch(() => {});
+    // Auto-login after signup — if this fails for any reason (transient network error,
+    // slow service cold-start, etc.) we still consider signup a success so the form
+    // flips to the login side and the user can sign in manually.
+    try {
+      await signIn({
+        email: payload.email || payload.phone_number,
+        password: payload.password,
+      });
+      if (payload.full_name.trim()) {
+        await authApi.updateMe({ full_name: payload.full_name }).then((updatedUser) => {
+          setUser(updatedUser);
+          window.localStorage.setItem(USER_KEY, JSON.stringify(updatedUser));
+        }).catch(() => {});
+      }
+    } catch {
+      // Auto-login failed; the account was created — let the user sign in manually.
     }
   }
 
