@@ -74,8 +74,17 @@ export async function loginDriver(payload: DriverLoginPayload): Promise<DriverLo
       headers: buildAuthHeaders(token),
     });
     const profile = await handleJsonResponse<Record<string, unknown>>(profileResponse);
-    driverId = String(profile.driver_id ?? profile.driverId ?? auth.user?.user_id ?? "");
-    fullName = typeof profile.full_name === "string" ? profile.full_name : "";
+    // API returns { id, first_name, last_name, full_name, ... } — use "id" as the marketplace driver id
+    driverId = String(profile.id ?? profile.driver_id ?? profile.driverId ?? auth.user?.user_id ?? "");
+    // full_name is now returned by the backend; fall back to joining first/last
+    const rawFullName = profile.full_name ?? profile.fullName;
+    if (typeof rawFullName === "string" && rawFullName.trim()) {
+      fullName = rawFullName.trim();
+    } else {
+      const first = typeof profile.first_name === "string" ? profile.first_name : "";
+      const last = typeof profile.last_name === "string" ? profile.last_name : "";
+      fullName = [first, last].filter(Boolean).join(" ");
+    }
     email = typeof profile.email === "string" ? profile.email : email;
   } catch {
     driverId = auth.user?.user_id ?? "";

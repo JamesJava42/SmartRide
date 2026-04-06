@@ -1,4 +1,3 @@
-import { GoogleLogin } from "@react-oauth/google";
 import { AlertCircle, Eye, EyeOff } from "lucide-react";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -156,32 +155,6 @@ export function LoginForm({ onSwitchToRegister }: { onSwitchToRegister: () => vo
           <span>{isLoading ? "Signing in..." : "Sign in"}</span>
         </span>
       </button>
-
-      <div className={styles.divider}>
-        <span className={styles.line} />
-        <span className={styles.or}>or</span>
-        <span className={styles.line} />
-      </div>
-
-      <GoogleLogin
-        onSuccess={async (credentialResponse) => {
-          if (!credentialResponse.credential) return;
-          setIsLoading(true);
-          try {
-            await auth.signInWithGoogle(credentialResponse.credential);
-            navigate("/");
-          } catch {
-            setApiError("Google sign-in failed. Please try again.");
-          } finally {
-            setIsLoading(false);
-          }
-        }}
-        onError={() => setApiError("Google sign-in failed. Please try again.")}
-        width="100%"
-        text="signin_with"
-        shape="rectangular"
-        theme="outline"
-      />
 
       <div className={styles.switch}>
         Don&apos;t have an account?{" "}

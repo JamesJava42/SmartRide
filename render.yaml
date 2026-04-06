@@ -42,6 +42,7 @@ services:
       - key: INTERNAL_SERVICE_TOKEN
         generateValue: true
       - key: GOOGLE_CLIENT_ID
+        value: "798031327258-h4jmu330ce5to2oe5bmci3c0gqrcuapi.apps.googleusercontent.com"  # Set to your Google OAuth Client ID
         sync: false  # Set manually in Render dashboard
 
   # ─── Marketplace Service ──────────────────────────────────────────────────
@@ -195,8 +196,10 @@ services:
         destination: /index.html
     envVars:
       - key: VITE_API_BASE_URL
+        value: "https://gateway-opth.onrender.com"  # Set to your gateway public URL
         sync: false  # Set to your gateway public URL: https://gateway.onrender.com
       - key: VITE_GOOGLE_CLIENT_ID
+        value: "798031327258-h4jmu330ce5to2oe5bmci3c0gqrcuapi.apps.googleusercontent.com"  # Set to your Google OAuth Client ID
         sync: false  # Set to your Google OAuth Client ID
 
   # ─── Driver Web (static site) ─────────────────────────────────────────────
@@ -211,8 +214,10 @@ services:
         destination: /index.html
     envVars:
       - key: VITE_API_BASE_URL
+        value: "https://gateway-opth.onrender.com"  # Set to your gateway public URL
         sync: false  # Set to your gateway public URL: https://gateway.onrender.com
       - key: VITE_GOOGLE_CLIENT_ID
+        value: "798031327258-h4jmu330ce5to2oe5bmci3c0gqrcuapi.apps.googleusercontent.com"  # Set to your Google OAuth Client ID
         sync: false  # Set to your Google OAuth Client ID
 
   # ─── Admin Panel (static site) ────────────────────────────────────────────
@@ -227,6 +232,8 @@ services:
         destination: /index.html
     envVars:
       - key: VITE_API_BASE_URL
+        value: "https://gateway-opth.onrender.com"  # Set to your gateway public URL
         sync: false  # Set to your gateway public URL: https://gateway.onrender.com
       - key: VITE_GOOGLE_CLIENT_ID
+        value: "798031327258-h4jmu330ce5to2oe5bmci3c0gqrcuapi.apps.googleusercontent.com"  # Set to your Google OAuth Client ID
         sync: false  # Not needed for admin panel

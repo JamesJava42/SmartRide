@@ -9,6 +9,7 @@ class DriverProfileResponse(BaseModel):
     id: str
     first_name: str
     last_name: str | None = None
+    full_name: str = ""
     phone_number: str
     status: str
     is_online: bool
@@ -16,6 +17,11 @@ class DriverProfileResponse(BaseModel):
     is_approved: bool
     rating_avg: Decimal | None = None
     total_rides_completed: int
+
+    def model_post_init(self, __context: object) -> None:
+        if not self.full_name:
+            parts = [self.first_name, self.last_name]
+            self.full_name = " ".join(p for p in parts if p)
 
 
 class DriverProfileUpdateRequest(BaseModel):
