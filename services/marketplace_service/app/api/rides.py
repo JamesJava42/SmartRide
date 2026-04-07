@@ -49,6 +49,15 @@ async def create_ride_request(
     return SuccessResponse(message="Ride requested successfully", data=result)
 
 
+@router.get("/api/v1/rides/{ride_id}/status", response_model=SuccessResponse)
+async def get_ride_status(
+    ride_id: str,
+    db: AsyncSession = Depends(get_db_session),
+    user=Depends(get_current_user),
+):
+    return SuccessResponse(data=await ride_service.get_ride_status(db, ride_id, user.user_id, user.role))
+
+
 @router.get("/api/v1/rides/{ride_id}", response_model=SuccessResponse)
 async def get_ride_detail(
     ride_id: str,

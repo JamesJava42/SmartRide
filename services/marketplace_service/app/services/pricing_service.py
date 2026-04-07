@@ -82,4 +82,57 @@ class PricingService:
         )
 
 
+    async def _create_estimate_for_ride(self, db: AsyncSession, payload: object) -> "FareEstimate":
+        """Create a FareEstimate from a RideRequestCreate payload (no HTTP error on missing card)."""
+        from app.models import FareEstimate as FE, PricingRateCard
+        from datetime import datetime, timezone
+        from sqlalchemy import and_, or_
+        vehicle_type = getattr(payload, "vehicle_type", "ECONOMY")
+        rate_card = await db.scalar(
+            select(PricingRateCard)
+            .where(
+                and_(
+                    PricingRateCard.vehicle_type == vehicle_type,
+                    PricingRateCard.is_active.is_(True),
+                    PricingRateCard.effective_from <= datetime.now(timezone.utc),
+                    or_(PricingRateCard.effective_to.is_(None), PricingRateCard.effective_to >= datetime.now(timezone.utc)),
+                )
+            )
+            .order_by(PricingRateCard.effective_from.desc())
+        )
+        if not rate_card:
+            raise ValueError("No rate card found")
+        distance = haversine_miles(
+            float(getattr(payload, "pickup_latitude", 0)),
+            float(getattr(payload, "pickup_longitude", 0)),
+            float(getattr(payload, "dropoff_latitude", 0)),
+            float(getattr(payload, "dropoff_longitude", 0)),
+        )
+        duration_minutes = max(1, round((distance / 28.0) * 60))
+        distance_fare = to_decimal(distance * float(rate_card.per_mile_rate))
+        time_fare = to_decimal(duration_minutes * float(rate_card.per_minute_rate))
+        subtotal = to_decimal(float(rate_card.base_fare) + float(distance_fare) + float(time_fare))
+        total = max(subtotal, rate_card.minimum_fare)
+        total = to_decimal(float(total) + float(rate_card.booking_fee) + float(rate_card.platform_fee))
+        payout = to_decimal(float(total) * float(rate_card.driver_payout_percent or 80) / 100)
+        estimate = FE(
+            vehicle_type=vehicle_type,
+            region_id=rate_card.region_id,
+            distance_miles=to_decimal(distance),
+            duration_minutes=duration_minutes,
+            base_fare=to_decimal(rate_card.base_fare),
+            distance_fare=distance_fare,
+            time_fare=time_fare,
+            surge_multiplier=to_decimal(1),
+            booking_fee=to_decimal(rate_card.booking_fee),
+            platform_fee=to_decimal(rate_card.platform_fee),
+            total_estimated_fare=total,
+            driver_payout_estimate=payout,
+            pricing_snapshot={"rate_card_id": rate_card.id},
+        )
+        db.add(estimate)
+        await db.flush()
+        return estimate
+
+
 pricing_service = PricingService()

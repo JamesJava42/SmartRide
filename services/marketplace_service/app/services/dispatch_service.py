@@ -27,33 +27,24 @@ class DispatchService:
         return settings.max_dispatch_retries
 
     async def _eligible_drivers(self, db: AsyncSession, ride: Ride) -> list[Driver]:
-        drivers = (
-            await db.execute(
-                select(Driver)
-                .where(
-                    and_(
-                        Driver.is_approved.is_(True),
-                        Driver.is_online.is_(True),
-                        Driver.is_available.is_(True),
-                        Driver.status == DriverStatus.ACTIVE,
-                        Driver.region_id == ride.region_id,
-                    )
+        base_filters = and_(
+            Driver.is_approved.is_(True),
+            Driver.is_online.is_(True),
+            Driver.is_available.is_(True),
+            Driver.status == DriverStatus.ACTIVE,
+        )
+        # Try region-matched drivers first (only when ride has a region)
+        if ride.region_id:
+            drivers = (
+                await db.execute(
+                    select(Driver).where(and_(base_filters, Driver.region_id == ride.region_id))
                 )
-            )
-        ).scalars().all()
-        if drivers:
-            return drivers
+            ).scalars().all()
+            if drivers:
+                return drivers
+        # Fall back to any available approved driver regardless of region
         return (
-            await db.execute(
-                select(Driver).where(
-                    and_(
-                        Driver.is_approved.is_(True),
-                        Driver.is_online.is_(True),
-                        Driver.is_available.is_(True),
-                        Driver.status == DriverStatus.ACTIVE,
-                    )
-                )
-            )
+            await db.execute(select(Driver).where(base_filters))
         ).scalars().all()
 
     async def _refresh_candidates(self, db: AsyncSession, ride: Ride) -> list[str]:

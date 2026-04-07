@@ -25,6 +25,7 @@ from app.schemas.ride import (
     RideRequestCreate,
     RideRequestedResponse,
     RideStatusActionResponse,
+    RideStatusResponse,
     RideVehicleSummary,
     SubmitRideFeedbackRequest,
     UnmatchedRideReportItem,
@@ -107,6 +108,16 @@ class RideService:
                 requested_at=duplicate_ride.requested_at,
             )
         fare_estimate = await db.get(FareEstimate, payload.fare_estimate_id) if payload.fare_estimate_id else None
+        # If no fare estimate was provided, try to find one by vehicle_type for pricing/region context
+        if not fare_estimate and payload.vehicle_type:
+            from app.schemas.pricing import FareEstimateRequest
+            from app.services.pricing_service import pricing_service
+            try:
+                fare_estimate = await pricing_service._create_estimate_for_ride(
+                    db, payload
+                )
+            except Exception:
+                pass  # pricing not configured — ride proceeds without estimate
         ride = Ride(
             rider_id=rider.id,
             region_id=fare_estimate.region_id if fare_estimate else None,
@@ -187,6 +198,11 @@ class RideService:
                     color=vehicle.color,
                 )
         fare_estimate = await db.get(FareEstimate, ride.fare_estimate_id) if ride.fare_estimate_id else None
+        vehicle_type = (
+            vehicle_summary.vehicle_type if vehicle_summary else
+            (fare_estimate.vehicle_type if fare_estimate else "ECONOMY")
+        )
+        estimated_fare = fare_estimate.total_estimated_fare if fare_estimate else (ride.final_fare_amount or 0)
         feedback_status = ride.feedback_status.value if ride.feedback_status else RideFeedbackStatus.PENDING.value
         receipt_available = ride.status == RideStatus.RIDE_COMPLETED and ride.final_fare_amount is not None
         can_rate_driver = (
@@ -200,6 +216,8 @@ class RideService:
             id=ride.id,
             status=ride.status.value,
             ride_type=ride.ride_type.value,
+            vehicle_type=vehicle_type,
+            estimated_fare=estimated_fare,
             payment_method=ride.payment_method or "CASH",
             pickup_address=ride.pickup_address,
             dropoff_address=ride.dropoff_address,
@@ -226,6 +244,23 @@ class RideService:
             can_rate_driver=can_rate_driver,
             can_tip=False,
             fare_breakdown=fare_breakdown,
+        )
+
+    async def get_ride_status(self, db: AsyncSession, ride_id: str, actor_user_id: str, role: UserRole) -> RideStatusResponse:
+        ride = await db.get(Ride, ride_id)
+        if not ride:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Ride not found")
+        await self._enforce_access(db, ride, actor_user_id, role)
+        driver_summary = None
+        if ride.driver_id:
+            driver = await db.get(Driver, ride.driver_id)
+            if driver:
+                driver_summary = RideDriverSummary(id=driver.id, first_name=driver.first_name, last_name=driver.last_name, rating_avg=driver.rating_avg)
+        return RideStatusResponse(
+            ride_id=ride.id,
+            status=ride.status.value,
+            driver=driver_summary,
+            eta_minutes=None,
         )
 
     async def list_rider_history(self, db: AsyncSession, rider_user_id: str, page: int, page_size: int) -> RideHistoryResponse:

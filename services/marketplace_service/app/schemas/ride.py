@@ -29,7 +29,13 @@ class RideDriverSummary(BaseModel):
     id: str
     first_name: str
     last_name: str | None = None
+    full_name: str = ""
     rating_avg: Decimal | None = None
+
+    def model_post_init(self, __context: object) -> None:
+        if not self.full_name:
+            parts = [self.first_name, self.last_name]
+            self.full_name = " ".join(p for p in parts if p)
 
 
 class RideVehicleSummary(BaseModel):
@@ -49,10 +55,20 @@ class RideFareBreakdownResponse(BaseModel):
     total: Decimal
 
 
+class RideStatusResponse(BaseModel):
+    """Lightweight status-only response for polling."""
+    ride_id: str
+    status: str
+    driver: RideDriverSummary | None = None
+    eta_minutes: int | None = None
+
+
 class RideDetailResponse(BaseModel):
     id: str
     status: str
     ride_type: str
+    vehicle_type: str = "ECONOMY"
+    estimated_fare: Decimal = Decimal("0")
     payment_method: str
     pickup_address: str
     dropoff_address: str
