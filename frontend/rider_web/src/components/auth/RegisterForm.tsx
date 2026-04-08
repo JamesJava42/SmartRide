@@ -161,20 +161,7 @@ export function RegisterForm({
       onSuccess();
     } catch (error) {
       if (error instanceof AuthApiError) {
-        if (error.status === 409) {
-          const raw = JSON.stringify(error.body).toLowerCase();
-          if (raw.includes("phone")) {
-            const next = { phoneNumber: "This phone number is already registered" };
-            setServerFieldErrors(next);
-            focusFirstError(next);
-          } else if (raw.includes("email")) {
-            const next = { email: "This email is already registered" };
-            setServerFieldErrors(next);
-            focusFirstError(next);
-          } else {
-            setApiError("An account with this email or phone already exists");
-          }
-        } else if (error.status === 422) {
+        if (error.status === 422) {
           setApiError("Please check your information and try again");
         } else if (error.status === 503 || error.status === 502) {
           setApiError("Service is starting up — please wait a moment and try again");

@@ -84,9 +84,15 @@ export function RiderSessionProvider({ children }: { children: ReactNode }) {
   }
 
   async function signUp(payload: { full_name: string; email: string; phone_number: string; password: string }) {
-    await authApi.signUp(payload);
-    // Auto-login after signup — if this fails for any reason (transient network error,
-    // slow service cold-start, etc.) we still consider signup a success so the form
+    try {
+      await authApi.signUp(payload);
+    } catch (err: any) {
+      // 409 means the account already exists (previous signup created it but auto-login
+      // failed so the user ended up back on the register form). Attempt login instead.
+      if (err?.status !== 409) throw err;
+    }
+    // Auto-login after signup (or after discovering the account already exists).
+    // If this fails for any reason we still consider signup a success so the form
     // flips to the login side and the user can sign in manually.
     try {
       await signIn({
