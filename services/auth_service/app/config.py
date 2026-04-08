@@ -24,6 +24,7 @@ class Settings(BaseSettings):
     google_client_id: str = Field(default="", validation_alias="GOOGLE_CLIENT_ID")
     jwt_access_token_expire_minutes: int = Field(default=15, validation_alias="JWT_ACCESS_TOKEN_EXPIRE_MINUTES")
     jwt_refresh_token_expire_days: int = Field(default=7, validation_alias="JWT_REFRESH_TOKEN_EXPIRE_DAYS")
+    cors_allow_origins: list[str] = Field(default_factory=lambda: ["*"], validation_alias="CORS_ALLOW_ORIGINS")
 
     @field_validator("database_url", mode="before")
     @classmethod
@@ -34,6 +35,17 @@ class Settings(BaseSettings):
             if v.startswith("postgresql://"):
                 return "postgresql+asyncpg://" + v[len("postgresql://"):]
         return v
+
+    @field_validator("cors_allow_origins", mode="before")
+    @classmethod
+    def parse_cors_allow_origins(cls, v: str | list[str]) -> list[str]:
+        if isinstance(v, str):
+            values = [item.strip() for item in v.split(",") if item.strip()]
+            return values or ["*"]
+        if isinstance(v, list):
+            values = [item.strip() for item in v if isinstance(item, str) and item.strip()]
+            return values or ["*"]
+        return ["*"]
 
     @model_validator(mode="after")
     def validate_jwt_settings(self) -> "Settings":
