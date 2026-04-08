@@ -172,13 +172,21 @@ export function RegisterForm({
             setServerFieldErrors(next);
             focusFirstError(next);
           } else {
-            setApiError("Registration failed. Please try again");
+            setApiError("An account with this email or phone already exists");
           }
         } else if (error.status === 422) {
           setApiError("Please check your information and try again");
+        } else if (error.status === 503 || error.status === 502) {
+          setApiError("Service is starting up — please wait a moment and try again");
         } else {
-          setApiError("Registration failed. Please try again");
+          // Show the actual server error message so we can debug
+          const serverMsg = typeof (error.body as any)?.message === "string"
+            ? (error.body as any).message
+            : error.message;
+          setApiError(serverMsg || `Request failed (${error.status}). Please try again`);
         }
+      } else if (error instanceof TypeError) {
+        setApiError("No connection — check your internet and try again");
       } else {
         setApiError("Registration failed. Please try again");
       }

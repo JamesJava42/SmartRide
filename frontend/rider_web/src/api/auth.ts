@@ -129,8 +129,9 @@ export const authApi = {
   signUp: (payload: { full_name: string; email?: string; phone_number?: string; password: string }) =>
     registerRider({
       full_name: payload.full_name,
-      email: payload.email ?? "",
-      phone_number: payload.phone_number ?? "",
+      // Send null (not empty string) so backend optional fields work correctly
+      email: payload.email?.trim() || "",
+      phone_number: payload.phone_number?.trim() || "",
       password: payload.password,
       role: "RIDER",
     }),

@@ -15,6 +15,11 @@ class SignUpRequest(BaseModel):
 
     @model_validator(mode="after")
     def validate_identity_and_role(self) -> "SignUpRequest":
+        # Treat empty strings as None so duplicate checks and DB constraints work
+        if self.email is not None and not self.email.strip():
+            self.email = None
+        if self.phone_number is not None and not self.phone_number.strip():
+            self.phone_number = None
         if not self.email and not self.phone_number:
             raise ValueError("Either email or phone_number must be provided")
         return self
